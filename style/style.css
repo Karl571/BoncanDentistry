@@ -1,0 +1,370 @@
+:root {
+    --default-color: #ddddDf; /* LightGray */
+    --active-color: #429fad; /* OrangeRed */
+    --primary-text-color: #1b5c62;
+    --secondary-text-color: #fff;
+    --group-header-bg: #000;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Header Styling */
+.top-header {
+    padding: 10px 20px;
+    background-color: #008080;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.user-info {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+.logout-btn {
+    padding: 8px 15px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Main Content Layout */
+.content-area {
+    display: flex;
+    flex: 1; /* Take up remaining height */
+}
+
+/* Navigation Panel Styling */
+.side-navigation {
+    width: 250px; /* Fixed width for navigation */
+    background-color: #348493;
+    padding: 10px 0;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+.side-navigation button {
+    display: block;
+    width: 95%; /* 100% minus padding/margin */
+    margin: 10px auto;
+    padding: 10px 10px;
+    background-color: var(--default-color);
+    color: var(--primary-text-color);
+    border: none;
+    text-align: left;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    border-radius: 4px;
+}
+.side-navigation button:hover:not(.active) {
+    background-color: #348493; /* Slightly darker gray on hover */
+}
+.side-navigation button.active {
+    background-color: var(--active-color);
+    color: var(--secondary-text-color);
+    font-weight: bold;
+}
+
+/* Group Label Styling */
+.nav-group-label {
+    padding: 5px 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+    color: var(--secondary-text-color);
+    background-color: var(--group-header-bg);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+/* Main View Panel Styling */
+.main-view-panel {
+    flex: 1; /* Take up all remaining space */
+    padding: 20px;
+    background-color: white;
+    overflow-y: auto;
+}
+
+/*LOGIN*/
+
+/* --- New Styles for the LogIn Page --- */
+
+/* Ensures the entire page is used to center the box */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #e9ecef; /* Slightly different background for the login screen */
+}
+
+/* Main login box styling */
+.login-box {
+    width: 350px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Header/Title */
+.header-panel {
+    margin-bottom: 20px;
+}
+.header-panel h2 {
+    color: #008080; /* Primary blue color */
+    font-size: 1.5em;
+    margin: 0;
+}
+
+/* Clock and Date Panel */
+.clock-panel {
+    background-color: #f8f9fa;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+}
+.clock-panel label {
+    display: block;
+    font-weight: bold;
+    color: var(--primary-text-color);
+}
+#lblTime {
+    font-size: 1.8em;
+}
+#lblDate {
+    font-size: 0.9em;
+}
+
+/* Input Fields */
+.input-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+.login-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+    font-size: 1em;
+}
+
+/* Buttons */
+.button-group {
+    margin-top: 20px;
+}
+.btn-login {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.btn-login:hover {
+    background-color: #0056b3;
+}
+
+.lbl-cancel {
+    display: block;
+    margin-top: 15px;
+    color: #dc3545; /* Danger red for cancel */
+    text-decoration: none;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+.lbl-cancel:hover {
+    text-decoration: underline;
+}
+
+/*For adding Role Modal*/
+/* Add these styles to your style.css */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's above everything else */
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #999;
+}
+
+.module-list-container {
+    max-height: 250px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.checked-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.checked-list li {
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+.checked-list label {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+
+/* ===== COLLAPSIBLE SIDEBAR STYLES ===== */
+
+/* Toggle button */
+.sidebar-toggle-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.6em;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: transform 0.2s ease;
+}
+.sidebar-toggle-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Adjust header to align toggle button nicely */
+.top-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+/* Adjust header to align toggle button nicely */
+.left-header {
+  display: flex;
+  align-items: left;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+/* Adjust header to align toggle button nicely */
+.right-header {
+  display: flex;
+  align-items: right;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+/* Sidebar transition */
+.side-navigation {
+  width: 250px;
+  transition: width 0.3s ease, opacity 0.3s ease;
+  overflow-x: hidden;
+}
+
+/* When collapsed */
+.side-navigation.collapsed {
+  width: 60px;
+}
+.side-navigation.collapsed .nav-group-label,
+.side-navigation.collapsed .loading-text,
+.side-navigation.collapsed button {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+/* Main view should expand when sidebar is collapsed */
+.side-navigation.collapsed + .main-view-panel {
+  flex: 1;
+  transition: all 0.3s ease;
+}
+
+.side-navigation.hidden {
+    display: none;
+}
+
+
+/* Responsive behavior for mobile */
+@media (max-width: 900px) {
+  .side-navigation {
+    position: fixed;
+    left: 0;
+    top: 60px;
+    height: 100%;
+    z-index: 1000;
+    width: 240px;
+    transform: translateX(-260px);
+    transition: transform 0.3s ease;
+  }
+
+  .side-navigation.collapsed {
+    transform: translateX(0);
+    width: 240px;
+  }
+
+  /* Slight overlay for focus */
+  body::after {
+    content: "";
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 900;
+  }
+
+  .side-navigation.collapsed ~ body::after {
+    display: block;
+  }
+
+  .sidebar-toggle-btn {
+    display: block;
+  }
+}

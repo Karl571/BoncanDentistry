@@ -1,0 +1,81 @@
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #015b57; /* teal background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.book-appointment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.form-container {
+  background-color: #f2f2f2; /* light gray card */
+  padding: 40px 50px;
+  border-radius: 16px;
+  width: 400px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.form-container h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.form-container p {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input, select {
+  padding: 12px;
+  border: none;
+  background-color: #cfcfcf; /* gray bars */
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+}
+
+input::placeholder {
+  color: #555;
+}
+
+select {
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23666" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+.submit-btn {
+  background-color: #00e0b0; /* mint green */
+  color: #000;
+  border: none;
+  padding: 14px;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #00cfa0;
+}

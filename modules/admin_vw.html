@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dr.Boncan Dentistry - Admin Panel</title>
+  <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+  <div id="admin-vw" class="main-container">
+
+    <div class="top-header">
+        <div class="left-header">
+            <!-- ✅ Added toggle button for sidebar -->
+            <button id="sidebarToggle" class="sidebar-toggle-btn">☰</button>
+
+            <div class="clinic-name" style="font-size: 1.5em; font-weight: bold;">
+                Ricardo B. Boncan Dentistry and Oral Surgery
+            </div>
+        </div>
+        <div class="right-header">
+            <div class="user-info">
+                Welcome, <span id="name-lbl">JOHN DOE</span> (<span id="role-lbl">Administrator</span>)
+            </div>
+
+            <input type="hidden" id="role-id" value="1"> 
+            <button id="btn-logout" class="logout-btn">Log Out</button>
+        </div>
+    </div> 
+
+    <div class="content-area">
+      <!-- Sidebar -->
+      <div id="panel1" class="side-navigation">
+        <div class="loading-text">Loading modules...</div>
+      </div>
+
+      <!-- Main view -->
+      <div id="view-pnl" class="main-view-panel">
+      </div>
+    </div>
+  </div>
+
+  <script src="../script/script.js"></script>
+
+  <!-- ✅ Collapsible Sidebar Script -->
+  <script>
+        const sidebar = document.getElementById('panel1');
+        const toggleBtn = document.getElementById('sidebarToggle'); // use the existing button
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+        });
+  </script>
+</body>
+</html>

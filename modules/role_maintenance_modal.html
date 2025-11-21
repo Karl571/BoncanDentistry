@@ -1,0 +1,23 @@
+<div id="role-modal-overlay" class="modal-overlay">
+    <div id="role-maintenance-modal" class="modal-content">
+        <span class="close-btn" onclick="closeRoleModal()">❌</span>
+        <h2>🔑 Add New Role</h2>
+        
+        <div class="form-group">
+            <label for="txtRoleName">Role Name</label>
+            <input type="text" id="txtRoleName" placeholder="e.g., Sales Manager, Administrator" required>
+        </div>
+
+        <h3>Assign Modules (Access)</h3>
+        <div class="module-list-container">
+            <ul id="checkedListModules" class="checked-list">
+                <li style="color:#999;">Loading modules...</li>
+            </ul>
+        </div>
+        
+        <div class="button-group-modal">
+            <button id="btnSaveRole" class="btn-form-action btn-save">💾 Save Role and Access</button>
+            <button id="btnCancelRole" class="btn-form-action btn-cancel" onclick="closeRoleModal()">❌ Cancel</button>
+        </div>
+    </div>
+</div>
