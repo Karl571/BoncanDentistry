@@ -9,6 +9,88 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
+<style>
+  .services-section {
+  padding: 80px 0;
+  text-align: center;
+  background-color: #f8f8f8;
+  font-family: 'Poppins', sans-serif;
+}
+
+.services-title {
+  font-size: 32px;
+  color: #015b57;
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+
+.services-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 25px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.service-card {
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 25px 20px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+  border-top: 7px solid #00e0b0;
+}
+
+.service-card h3 {
+  font-size: 20px;
+  color: #015b57;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.service-card p {
+  font-size: 14px;
+  color: #555;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 18px rgba(0, 0, 0, 0.12);
+}
+.footer {
+  background: #015b57;
+  color: white;
+  text-align: center;
+  padding: 20px 10px;
+  margin-top: 60px;
+  font-size: 14px;
+}
+
+.footer-content {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.footer-socials {
+  margin-top: 8px;
+}
+
+.footer-socials a {
+  color: white;
+  margin: 0 8px;
+  font-size: 18px;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.footer-socials a:hover {
+  opacity: 0.7;
+}
+
+
+
+  </style>
 <body>
   <!-- Navigation -->
   <nav>
@@ -95,60 +177,40 @@
 
 
   <!-- Our Services Section -->
-<section class="services" id="services">
-  <div class="services-header">
-    <h2>Our Services</h2>
-    <div class="line"></div>
-  </div>
+ <section class="services-section" id="services">
+  <h2 class="services-title">Our Services</h2>
 
-  <div class="services-grid">
+  <div class="services-container">
+
     <div class="service-card">
-      <div class="img-box">
-        <div class="accent"></div>
-        <div class="photo" style="background-image: url('images/tmd.jpg');"></div>
-      </div>
-      <p>TMD Consult<br>Jaw (panga)</p>
+      <h3>TMD Consult</h3>
+      <p>Jaw (Panga)</p>
     </div>
 
     <div class="service-card">
-      <div class="img-box">
-        <div class="accent"></div>
-        <div class="photo" style="background-image: url('images/cleaning.jpg');"></div>
-      </div>
-      <p>Oral Prophylaxis<br>(Cleaning)</p>
+      <h3>Cleaning</h3>
+      <p>Oral Prophylaxis</p>
     </div>
 
     <div class="service-card">
-      <div class="img-box">
-        <div class="accent"></div>
-        <div class="photo" style="background-image: url('images/filling.jpg');"></div>
-      </div>
-      <p>Filling<br>(Pasta)</p>
+      <h3>Filling</h3>
+      <p>(Pasta)</p>
     </div>
 
     <div class="service-card">
-      <div class="img-box">
-        <div class="accent"></div>
-        <div class="photo" style="background-image: url('images/extraction.jpg');"></div>
-      </div>
-      <p>Extraction<br>(Bunot)</p>
+      <h3>Extraction</h3>
+      <p>(Bunot)</p>
     </div>
 
     <div class="service-card">
-      <div class="img-box">
-        <div class="accent"></div>
-        <div class="photo" style="background-image: url('images/denture.jpg');"></div>
-      </div>
-      <p>Denture<br>(Pustiso)</p>
+      <h3>Denture</h3>
+      <p>(Pustiso)</p>
     </div>
 
     <div class="service-card">
-      <div class="img-box">
-        <div class="accent"></div>
-        <div class="photo" style="background-image: url('images/consultation.jpg');"></div>
-      </div>
-      <p>Regular<br>Consultation</p>
+      <h3>Regular Consultation</h3>
     </div>
+
   </div>
 </section>
 
@@ -262,6 +324,20 @@
     </div>
   </div>
 </section>
+
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>&copy; 2025 Ricardo B. Boncan Dental Clinic. All Rights Reserved.</p>
+
+    <div class="footer-socials">
+      <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="#"><i class="fa-brands fa-instagram"></i></a>
+      <a href="mailto:boncandentalclinic@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+  </div>
+</footer>
+
 <script src="assets/js/faq.js" defer></script>
 
 

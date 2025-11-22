@@ -13,27 +13,25 @@
       <h2>Book an Appointment</h2>
       <p>Please fill out the form below to make an appointment</p>
 
-      <form action="#" method="POST">
-        <input type="text" placeholder="First Name" required>
-        <input type="text" placeholder="Last Name" required>
-        <input type="tel" placeholder="Phone Number" required>
-        <input type="email" placeholder="Email" required>
+    <form id="appointmentForm" action="bookappointment.php" method="POST">
+  <input type="text" id="firstName" name="first_name" placeholder="First Name" required>
+  <input type="text" id="lastName" name="last_name" placeholder="Last Name" required>
+  <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+  <input type="email" id="email" name="email" placeholder="Email" required>
 
-        <select required>
-          <option value="" disabled selected>Dental Services</option>
-          <option>Regular Consultation</option>
-          <option>Oral Prophylaxis (Cleaning)</option>
-          <option>Filling (Pasta)</option>
-          <option>Extraction (Bunot)</option>
-          <option>Denture (Pustiso)</option>
-          <option>TMD Consult Jaw (Panga)</option>
-        </select>
+  <select id="service" name="service" required>
+    <option value="" disabled selected>Dental Services</option>
+    <option>Regular Consultation</option>
+    <option>Oral Prophylaxis (Cleaning)</option>
+    <option>Filling (Pasta)</option>
+    <option>Extraction (Bunot)</option>
+    <option>Denture (Pustiso)</option>
+    <option>TMD Consult Jaw (Panga)</option>
+  </select>
 
         <!-- Updated: actual time picker -->
-        <input type="time" required placeholder="Preferred Time">
-
-        <!-- Date picker -->
-        <input type="date" required placeholder="Preferred Date">
+        <input type="date" id="apptDate" name="appointment_date" required>
+  <input type="time" id="apptTime" name="appointment_time" required>
 
         <button type="submit" class="submit-btn">Submit</button>
       </form>
