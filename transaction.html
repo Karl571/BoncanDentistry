@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History</title>
+    <link rel="stylesheet" href="transaction.css">
+</head>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Georgia", serif;
+}
+
+body {
+    background: #f5f5f5;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* =============== SIDEBAR =============== */
+.sidebar {
+    width: 199px;
+    background-color: #003B3A;
+    height: 100vh;
+    padding: 20px;
+    color: white;
+}
+
+.profile {
+    text-align: center;
+}
+
+.avatar {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: white;
+    margin: auto;
+}
+
+.username {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.nav {
+    margin-top: 25px;
+}
+
+.nav-link {
+    display: block;
+    padding: 10px;
+    margin-bottom: 8px;
+    text-decoration: none;
+    background: none;
+    color: #d8d8d8;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: #d1d1d1;
+    color: #000;
+}
+
+.logout {
+    position: absolute;
+    bottom: 30px;
+}
+
+.logout-btn {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* =============== MAIN CONTENT =============== */
+.main {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 16px;
+    margin-bottom: 25px;
+    color: #555;
+}
+
+/* =============== CUSTOMER CARDS =============== */
+.customer-container {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.customer-card {
+    width: 300px;
+    background: #e8e8e8;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.customer-card h3 {
+    margin-bottom: 10px;
+}
+
+.customer-card p {
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.btn {
+    margin-top: 10px;
+    padding: 8px 18px;
+    background: #d1d1d1;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #c0c0c0;
+}
+
+/* =============== TABLE STYLES (Transactions, Services) =============== */
+.services-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
+.services-table th {
+    background: #003B3A;
+    color: white;
+    padding: 14px;
+    text-align: left;
+    font-size: 16px;
+}
+
+.services-table td {
+    padding: 12px;
+    font-size: 14px;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.services-table tr:hover {
+    background: #f0f0f0;
+}
+
+.services-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* =============== RESPONSIVE =============== */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 15px;
+    }
+
+    .main {
+        padding: 20px;
+    }
+
+    .customer-container {
+        justify-content: center;
+    }
+
+    .customer-card {
+        width: 90%;
+    }
+}
+</style>
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="profile">
+            <div class="avatar"></div>
+            <p class="username">Karl</p>
+        </div>
+        <hr>
+
+        <nav class="nav">
+            <a href="dashboard.html" class="nav-link">Home</a>
+            <a href="appointment.html" class="nav-link">Appointment</a>
+            <a href="patientrecords.html" class="nav-link">Patient Records</a>
+            <a href="services.html" class="nav-link">List Of Services</a>
+            <a href="transaction.html" class="nav-link active">Transaction History</a>
+        </nav>
+
+        <div class="logout">
+            <a href="#" class="logout-btn">Log out</a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+
+        <h1 class="title">Transaction History</h1>
+        <p class="subtitle">List of all clinic transactions</p>
+
+        <table class="services-table">
+            <thead>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Service</th>
+                    <th>Date</th>
+                    <th>Amount Paid</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Karl Mendoza</td>
+                    <td>Consultation</td>
+                    <td>Jan 12, 2025</td>
+                    <td>₱1,500</td>
+                    <td>Paid</td>
+                </tr>
+
+                <tr>
+                    <td>Anna Cruz</td>
+                    <td>Oral Prophylaxis</td>
+                    <td>Jan 15, 2025</td>
+                    <td>₱2,500</td>
+                    <td>Paid</td>
+                </tr>
+
+                <tr>
+                    <td>Michael Santos</td>
+                    <td>Filling</td>
+                    <td>Jan 19, 2025</td>
+                    <td>₱2,000</td>
+                    <td>Pending</td>
+                </tr>
+
+                <tr>
+                    <td>Sarah Lopez</td>
+                    <td>Extraction</td>
+                    <td>Jan 20, 2025</td>
+                    <td>₱3,200</td>
+                    <td>Paid</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </main>
+
+</div>
+
+</body>
+</html>
+
