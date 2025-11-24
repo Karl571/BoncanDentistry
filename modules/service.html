@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Services</title>
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+
+<style>
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #075550;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* MAIN LAYOUT */
+.dashboard-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 260px;
+    background: #073b36;
+    color: white;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.avatar {
+    font-size: 35px;
+    background: #fff;
+    color: #073b36;
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu a {
+    display: block;
+    margin: 18px 0;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 10px;
+}
+
+.menu a:hover, 
+.menu a.active {
+    color: #59d3bd;
+}
+
+.logout {
+    margin-top: auto;
+    color: #ffb3b3;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* MAIN CONTENT */
+.main-content {
+    flex: 1;
+    background: white;
+    padding: 50px;
+    overflow-y: auto;
+}
+
+.main-content h1 {
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.main-content p {
+    color: #444;
+    margin-bottom: 20px;
+}
+
+/* SERVICE GRID */
+.services-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+/* SERVICE CARD */
+.card {
+    background: #f1f1f1;
+    padding: 22px;
+    border-radius: 12px;
+    width: 30%;
+    min-width: 300px;
+}
+
+.card h3 {
+    margin-bottom: 15px;
+    color: #0b5a53;
+}
+
+.card p {
+    margin-bottom: 5px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 9px 15px;
+    border: none;
+    background: #0b5a53;
+    color: white;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+button:hover {
+    background: #097065;
+}
+</style>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="profile">
+           
+            <h3>Karl</h3>
+        </div>
+
+        <nav class="menu">
+            <a href="patient_dashboard.html">Home</a>
+            <a href="appointment.html">Appointment</a>
+            <a href="patient_record.html">Patient Records</a>
+            <a href="service.html" class="active">List Of Services</a>
+            <a href="transaction_history.html">Transaction History</a>
+            <a href="profile.html">Profile / Account Settings</a>
+        </nav>
+
+        <a href="logout.php" class="logout">Log Out</a>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <h1>Our Dental Services</h1>
+        <p>Explore the services offered at our clinic and their details.</p>
+
+        <div class="services-list">
+
+            <div class="card">
+                <h3>Dental Cleaning</h3>
+                <p><b>Price:</b> ₱2,500</p>
+                <p>Routine cleaning to remove plaque and tartar.</p>
+                <button>Book Now</button>
+            </div>
+
+            <div class="card">
+                <h3>Tooth Filling</h3>
+                <p><b>Price:</b> ₱3,000</p>
+                <p>Restoration of cavities using dental filling materials.</p>
+                <button>Book Now</button>
+            </div>
+
+            <div class="card">
+                <h3>Tooth Extraction</h3>
+                <p><b>Price:</b> ₱4,500</p>
+                <p>Removal of a damaged or problematic tooth safely.</p>
+                <button>Book Now</button>
+            </div>
+
+            <div class="card">
+                <h3>Consultation</h3>
+                <p><b>Price:</b> ₱1,000</p>
+                <p>Initial consultation with our dental specialists.</p>
+                <button>Book Now</button>
+            </div>
+
+            <div class="card">
+                <h3>Fluoride Treatment</h3>
+                <p><b>Price:</b> ₱1,200</p>
+                <p>Strengthens teeth to prevent decay.</p>
+                <button>Book Now</button>
+            </div>
+
+            <div class="card">
+                <h3>Teeth Whitening</h3>
+                <p><b>Price:</b> ₱5,000</p>
+                <p>Professional whitening treatment for a brighter smile.</p>
+                <button>Book Now</button>
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

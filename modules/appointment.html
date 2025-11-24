@@ -1,0 +1,197 @@
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Appointments</title>
+</head>
+
+<style>
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #075550;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* MAIN LAYOUT */
+.dashboard-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 260px;
+    background: #073b36;
+    color: white;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.avatar {
+    font-size: 35px;
+    background: #fff;
+    color: #073b36;
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu a {
+    display: block;
+    margin: 18px 0;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 10px;
+}
+
+.menu a:hover, 
+.menu a.active {
+    color: #59d3bd;
+}
+
+.logout {
+    margin-top: auto;
+    color: #ffb3b3;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* MAIN CONTENT */
+.main-content {
+    flex: 1;
+    background: white;
+    padding: 50px;
+    overflow-y: auto;
+}
+
+.main-content h1 {
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.main-content p {
+    color: #444;
+    margin-bottom: 20px;
+}
+
+/* APPOINTMENT GRID */
+.appointment-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+/* APPOINTMENT CARD */
+.card {
+    background: #f1f1f1;
+    padding: 22px;
+    border-radius: 12px;
+    width: 30%;
+    min-width: 300px;
+}
+
+.card h3 {
+    margin-bottom: 15px;
+    color: #0b5a53;
+}
+
+.card p {
+    margin-bottom: 5px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 9px 15px;
+    border: none;
+    background: #0b5a53;
+    color: white;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+button:hover {
+    background: #097065;
+}
+</style>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="profile">
+           
+            <h3>Karl</h3>
+        </div>
+
+        <nav class="menu">
+            <a href="patient_dashboard.html">Home</a>
+            <a href="appointment.html" class="active">Appointment</a>
+            <a href="patient_record.html">Patient Records</a>
+            <a href="service.html">List Of Services</a>
+            <a href="transaction_history.html">Transaction History</a>
+            <a href="profile.html">Profile / Account Settings</a>
+        </nav>
+
+        <a href="logout.php" class="logout">Log Out</a>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <h1>Your Appointments</h1>
+        <p>Manage your scheduled dental visits below.</p>
+
+        <div class="appointment-list">
+
+            <div class="card">
+                <h3>Dental Cleaning</h3>
+                <p><b>Date:</b> Oct 25, 2025</p>
+                <p><b>Time:</b> 10:00 AM</p>
+                <p><b>Dentist:</b> Dr. Ricardo B. Boncan</p>
+                <p><b>Status:</b> Confirmed</p>
+                <button>View Details</button>
+            </div>
+
+            <div class="card">
+                <h3>Tooth Extraction</h3>
+                <p><b>Date:</b> Nov 03, 2025</p>
+                <p><b>Time:</b> 2:30 PM</p>
+                <p><b>Dentist:</b> Dr. Maria Santos</p>
+                <p><b>Status:</b> Pending</p>
+                <button>View Details</button>
+            </div>
+
+            <div class="card">
+                <h3>Consultation</h3>
+                <p><b>Date:</b> Jan 14, 2026</p>
+                <p><b>Time:</b> 4:00 PM</p>
+                <p><b>Dentist:</b> Dr. Anne Dela Cruz</p>
+                <p><b>Status:</b> Upcoming</p>
+                <button>View Details</button>
+            </div>
+
+        </div>
+
+    
