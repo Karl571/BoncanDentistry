@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 contentHTML = `<div style="color:red;padding:10px;">Error loading ${moduleName}: ${error.message}</div>`;
             }
         }
-                else if (moduleName === "Reports") {
+        else if (moduleName === "Reports") {
             // Load the HTML content for Account Maintenance
             try {
                 const response = await fetch('reports.html');
@@ -278,6 +278,76 @@ document.addEventListener('DOMContentLoaded', () => {
                 contentHTML = `<div style="color:red;padding:10px;">Error loading ${moduleName}: ${error.message}</div>`;
             }
         }
+         else if (moduleName === "Customer Dashboard") {
+            // Load the HTML content for Account Maintenance
+            try {
+                const response = await fetch('patient_dashboard.html');
+                if (response.ok) {
+                    contentHTML = await response.text();
+                } else {
+                    throw new Error(`Failed to load: ${response.statusText}`);
+                }
+            } catch (error) {
+                console.error(`Error loading module ${moduleName}:`, error);
+                contentHTML = `<div style="color:red;padding:10px;">Error loading ${moduleName}: ${error.message}</div>`;
+            }
+        }
+       else if (moduleName.includes("Customer Dashboard") || moduleName.includes("Patient Dashboard")) {
+    try {
+        const response = await fetch('patient_dashboard.html');
+        if (response.ok) contentHTML = await response.text();
+        else throw new Error(response.statusText);
+    } catch (error) {
+        contentHTML = `<div style="color:red;padding:10px;">Error loading ${moduleName}: ${error.message}</div>`;
+    }
+}
+else if (moduleName.includes("Customer Appointment") || moduleName.includes("Appointment")) {
+    try {
+        const response = await fetch('appointment.html');
+        if (response.ok) contentHTML = await response.text();
+        else throw new Error(response.statusText);
+    } catch (error) {
+        contentHTML = `<div style="color:red;padding:10px;">Error loading ${moduleName}: ${error.message}</div>`;
+    }
+}
+else if (moduleName.includes("Customer PatientRecord") || moduleName.includes("Patient")) {
+    try {
+        const response = await fetch('patient_record.html');
+        if (response.ok) contentHTML = await response.text();
+        else throw new Error(response.statusText);
+    } catch (error) {
+        contentHTML = `<div style="color:red;padding:10px;">Error loading ${moduleName}: ${error.message}</div>`;
+    }
+}
+else if (moduleName.includes("Customer Service") || moduleName.includes("Service")) {
+    try {
+        const response = await fetch('service.html');
+        if (response.ok) contentHTML = await response.text();
+        else throw new Error(response.statusText);
+    } catch (error) {
+        contentHTML = `<div style="color:red;padding:10px;">Error loading ${moduleName}: ${error.message}</div>`;
+    }
+}
+else if (moduleName.includes("Customer Transaction") || moduleName.includes("Transaction")) {
+    try {
+        const response = await fetch('transaction.html');
+        if (response.ok) contentHTML = await response.text();
+        else throw new Error(response.statusText);
+    } catch (error) {
+        contentHTML = `<div style="color:red;padding:10px;">Error loading ${moduleName}: ${error.message}</div>`;
+    }
+}
+else if (moduleName.includes("Customer Profile") || moduleName.includes("Profile")) {
+    try {
+        const response = await fetch('profile.html');
+        if (response.ok) contentHTML = await response.text();
+        else throw new Error(response.statusText);
+    } catch (error) {
+        contentHTML = `<div style="color:red;padding:10px;">Error loading ${moduleName}: ${error.message}</div>`;
+    }
+}
+
+        
         // Add more module loading logic here as needed...
         else {
             contentHTML = `<div class="module-content"><h2>${moduleName}</h2><p>Module content placeholder.</p></div>`;
@@ -394,6 +464,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const servicesRows = [];
             const maintenanceRows = [];
             const otherRows = [];
+            const customerRows = [];
 
             // Grouping logic (Based on module name)
             data.modules.forEach(row => {
@@ -401,11 +472,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     analyticsRows.push(row);
                 } else if (row.module.includes("Maintenance")) {
                     maintenanceRows.push(row);
-                } else if (row.module.includes("Doctor")||row.module.includes("Transaction")|| row.module.includes("Request")|| row.module.includes("Logs")) {
+                }else if (row.module.startsWith("Customer") || row.module.includes("Customer")) { 
+        customerRows.push(row);   
+                }else if (row.module.includes("Doctor")||row.module.includes("Transaction")|| row.module.includes("Request")|| row.module.includes("Logs")) {
                     transactionRows.push(row);
                 } else if (row.module.includes("Stocking")) {
                     inventoryRows.push(row);
-                } else {
+                }  {
                     otherRows.push(row);
                 }
             });
@@ -414,6 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
             addGroup("Analytics", analyticsRows);
             addGroup("Maintenance", maintenanceRows);
             addGroup("Inventory", inventoryRows);
+            addGroup("Customer", customerRows);
             addGroup("Transaction", transactionRows); 
             addGroup("Other", otherRows);
 
@@ -449,5 +523,5 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = '../index.php'; 
         }
     });
-    
+    z
 });

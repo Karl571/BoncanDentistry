@@ -3,54 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Patient Dashboard</title>
+    <link rel="stylesheet" href="assets/css/dashboard.css">
 </head>
 <style>
-  .footer {
-  background: #015b57;
-  color: white;
-  text-align: center;
-  padding: 20px 10px;
-  margin-top: 60px;
-  font-size: 14px;
+  /* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.footer-content {
-  max-width: 1100px;
-  margin: 0 auto;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #075550;
+    height: 100vh;
+    overflow: hidden;
 }
 
-.footer-socials {
-  margin-top: 8px;
+/* MAIN LAYOUT */
+.dashboard-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
 }
 
-.footer-socials a {
-  color: white;
-  margin: 0 8px;
-  font-size: 18px;
-  text-decoration: none;
-  transition: 0.2s ease;
+.sidebar {
+    width: 260px;
+    background: #073b36;
+    color: white;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* moves content to top */
+}
+.logout {
+    margin-top: auto;
 }
 
-.footer-socials a:hover {
-  opacity: 0.7;
+
+
+.profile {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.avatar {
+    font-size: 35px;
+    background: #fff;
+    color: #073b36;
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu a {
+    display: block;
+    margin: 18px 0;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 10px;
+}
+
+.menu a:hover {
+    color: #59d3bd;
+}
+
+.logout {
+    color: #ffb3b3;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* MAIN CONTENT */
+.main-content {
+    flex: 1;
+    background: white;
+    padding: 50px;
+    overflow-y: auto;
+}
+
+.main-content h1 {
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.main-content p {
+    color: #444;
+    margin-bottom: 20px;
+}
+
+/* CARD GRID */
+.cards {
+    display: flex;
+    gap: 25px;
+}
+
+/* CARD STYLES */
+.card {
+    background: #f1f1f1;
+    padding: 22px;
+    border-radius: 12px;
+    width: 30%;
+}
+
+.card h3 {
+    margin-bottom: 20px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 9px 15px;
+    border: none;
+    background: #0b5a53;
+    color: white;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+button:hover {
+    background: #097065;
 }
 
 </style>
 <body>
-<footer class="footer">
-  <div class="footer-content">
-    <p>&copy; 2025 Ricardo B. Boncan Dental Clinic. All Rights Reserved.</p>
 
-    <div class="footer-socials">
-      <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-      <a href="#"><i class="fa-brands fa-instagram"></i></a>
-      <a href="mailto:boncandentalclinic@gmail.com"><i class="fa-solid fa-envelope"></i></a>
-    </div>
-  </div>
-</footer>
+<div class="dashboard-container">
 
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="profile">
+            <div class="avatar">👤</div>
+            <h3>Karl</h3>
+        </div>
+
+        <nav class="menu">
+            <a href="#">Home</a>
+            <a href="#">Appointment</a>
+            <a href="#">Patient Records</a>
+            <a href="#">List Of Services</a>
+            <a href="#">Transaction History</a>
+        </nav>
+
+        <a href="logout.php" class="logout">Log Out</a>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <h1>Welcome Back, Karl!</h1>
+        <p>Here’s a brief overview of your upcoming appointment and dental history.</p>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Next Appointment</h3>
+                <p><b>Date:</b> Oct 25, 2025</p>
+                <p><b>Time:</b> 10:00 AM</p>
+                <p><b>Doctor:</b> Dr. Ricardo B. Boncan</p>
+                <p><b>Service:</b> Dental Cleaning</p>
+                <button>View Appointment Details</button>
+            </div>
+
+            <div class="card">
+                <h3>Dental History</h3>
+                <p><b>Date:</b> Oct 05, 2025</p>
+                <p><b>Service:</b> Cleaning</p>
+                <p><b>Status:</b> Completed</p>
+                <button>View Full Record</button>
+            </div>
+
+            <div class="card">
+                <h3>Transaction Summary</h3>
+                <p><b>Date:</b> Oct 05, 2025</p>
+                <p><b>Service:</b> Cleaning</p>
+                <p><b>Amount:</b> 2,500</p>
+                <p><b>Status:</b> Paid</p>
+                <button>View All Transactions</button>
+            </div>
+
+        </div>
+    </main>
+
+</div>
 
 </body>
 </html>
