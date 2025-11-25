@@ -1,237 +1,162 @@
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dental Clinic Inventory — Product Stocking</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Stocking</title>
   <style>
-    :root{
-      --bg: #f4f9fb;
-      --accent-1: #1B5C62;
-      --accent-2: #348493;
-      --accent-3: #3A8E9D;
-      --accent-4: #429FAD;
-      --muted: #69737a;
-      --card: #ffffff;
-      --success: #d4edda;
-      --warning: #fff3cd;
-      --danger: #ffdada;
-      --radius: 10px;
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f9fb;
+    }
+    h1 {
+      color: #1B5C62;
+      margin-bottom: 20px;
     }
 
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-
-      font-family: Inter, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background:var(--bg);
-      color:#1e2933;
-      
+    .form-box, .table-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      margin-bottom: 25px;
     }
 
-    .app{
-      max-width:1100px;
-      margin:0 auto;
-      display:grid;
-      grid-template-columns: 360px 1fr;
-      gap:20px;
-      align-items:start;
+    label { font-weight: bold; }
+
+    input, select {
+      padding: 10px;
+      width: 100%;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
     }
 
-    .panel{
-      background:var(--card);
-      border-radius:var(--radius);
-      padding:18px;
-      box-shadow:0 6px 18px rgba(17,24,39,0.06);
+    button {
+      padding: 10px 20px;
+      background: #1B5C62;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
     }
 
-    .brand{
-      display:flex;gap:12px;align-items:center;margin-bottom:12px
+    table {
+      width: 100%;
+      border-collapse: collapse;
     }
-    .logo{
-      width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--accent-2),var(--accent-4));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+      text-align: left;
     }
-    h1{font-size:18px;margin:0}
-    p.lead{color:var(--muted);margin:6px 0 18px;font-size:13px}
-
-    label{display:block;font-size:13px;color:var(--muted);margin-top:10px}
-    input[type="text"], input[type="number"], select{
-      width:100%;padding:10px;border-radius:8px;border:1px solid #e6eef0;margin-top:6px;font-size:14px
-    }
-    .row{display:flex;gap:10px}
-
-    button.primary{
-      background:var(--accent-1);color:#fff;border:0;padding:10px 14px;border-radius:8px;font-weight:600;margin-top:12px;cursor:pointer
-    }
-    button.ghost{background:transparent;border:1px solid #e6eef0;padding:9px 12px;border-radius:8px;cursor:pointer;margin-top:12px}
-
-    .topbar{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-    .search{flex:1;display:flex;gap:8px;align-items:center}
-    .search input{flex:1;padding:10px 12px;border-radius:999px;border:1px solid #e6eef0}
-
-    .stats{display:flex;gap:12px}
-    .stat{background:linear-gradient(180deg, rgba(66,159,173,0.08), rgba(52,132,147,0.04));padding:10px 12px;border-radius:8px;min-width:110px}
-    .stat .num{font-weight:700;color:var(--accent-1)}
-    .stat .lbl{font-size:12px;color:var(--muted)}
-
-    table{width:100%;border-collapse:collapse;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 6px 18px rgba(17,24,39,0.04)}
-    thead th{background:var(--accent-3);color:white;padding:12px 14px;text-align:left;font-size:13px}
-    tbody td{padding:12px 14px;border-bottom:1px solid #f2f6f7;font-size:14px}
-    tbody tr:hover{background:linear-gradient(90deg, rgba(66,159,173,0.03), rgba(52,132,147,0.02))}
-
-    .badge{display:inline-block;padding:6px 8px;border-radius:999px;font-weight:600;font-size:12px}
-    .in-stock{background:var(--success);color:var(--accent-1)}
-    .low-stock{background:var(--warning);color:#856404}
-    .out-stock{background:var(--danger);color:#922626}
-
-    .actions button{border:0;background:transparent;cursor:pointer;padding:6px;border-radius:6px}
-
-    .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
-    .p-card{background:var(--card);padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(17,24,39,0.04)}
-    .p-card h3{margin:0 0 6px;font-size:15px}
-    .p-card .meta{font-size:13px;color:var(--muted)}
-
-    @media(max-width:980px){
-      .app{grid-template-columns:1fr;}
-      .panel{order:2}
+    th {
+      background: #1B5C62;
+      color: white;
     }
   </style>
 </head>
 <body>
+  <h1>Product Stocking</h1>
 
-  <div class="app">
+  <div class="form-box">
+    <h2>Add / Restock Supply</h2>
 
-    <!-- LEFT PANEL -->
-    <aside class="panel">
-      <div class="brand">
-        <div class="logo">D</div>
-        <div>
-          <h1>Dental Clinic — Inventory Stocking</h1>
-          <p class="lead">Add new dental supplies or manage your clinic inventory.</p>
-        </div>
-      </div>
+    <label>Supply Item</label>
+    <select id="supplySelect"></select>
 
-      <form class="form-add" onsubmit="return false;">
-        <label>Item Name</label>
-        <input type="text" id="name" placeholder="e.g. Dental Gloves, 100pcs" />
+    <label>Quantity to Add</label>
+    <input type="number" id="qtyInput" placeholder="Enter quantity" />
 
-        <label>Item Code / SKU</label>
-        <input type="text" id="sku" placeholder="e.g. DC-GL-001" />
-
-        <div class="row">
-          <div style="flex:1">
-            <label>Quantity</label>
-            <input type="number" id="qty" min="0" value="0" />
-          </div>
-          <div style="width:120px">
-            <label>Unit</label>
-            <select id="unit">
-              <option>pcs</option>
-              <option>box</option>
-              <option>pack</option>
-            </select>
-          </div>
-        </div>
-
-        <label>Category</label>
-        <input type="text" id="cat" placeholder="e.g. Consumables, Tools" />
-
-        <div style="display:flex;gap:8px">
-          <button class="primary">Add Item</button>
-          <button type="button" class="ghost">Reset</button>
-        </div>
-
-        <hr style="margin:16px 0;border:none;border-top:1px solid #eef6f7" />
-
-        <label>Quick Filters</label>
-        <div style="display:flex;gap:8px;margin-top:8px">
-          <button class="ghost">All</button>
-          <button class="ghost">Low Stock</button>
-          <button class="ghost">Out of Stock</button>
-        </div>
-      </form>
-    </aside>
-
-    <!-- RIGHT CONTENT -->
-    <main>
-      <div class="topbar">
-        <div class="search">
-          <input placeholder="Search item, code, or category..." />
-        </div>
-
-        <div class="stats">
-          <div class="stat"><div class="num">180</div><div class="lbl">Total Items</div></div>
-          <div class="stat"><div class="num">12</div><div class="lbl">Low Stock</div></div>
-          <div class="stat"><div class="num">3</div><div class="lbl">Out of Stock</div></div>
-        </div>
-      </div>
-
-      <!-- TABLE -->
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Code</th>
-            <th>Category</th>
-            <th>Qty</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Nitrile Gloves (100pcs)</td>
-            <td>DC-001</td>
-            <td>Consumables</td>
-            <td>120 pcs</td>
-            <td><span class="badge in-stock">In Stock</span></td>
-            <td class="actions"><button title="Edit">✏️</button><button title="Remove">🗑️</button></td>
-          </tr>
-          <tr>
-            <td>Sterilization Pouches</td>
-            <td>DC-014</td>
-            <td>Sterilization</td>
-            <td>18 pack</td>
-            <td><span class="badge low-stock">Low Stock</span></td>
-            <td class="actions"><button title="Edit">✏️</button><button title="Remove">🗑️</button></td>
-          </tr>
-          <tr>
-            <td>Lidocaine 2% Cartridge</td>
-            <td>DC-099</td>
-            <td>Anesthetics</td>
-            <td>0 box</td>
-            <td><span class="badge out-stock">Out of Stock</span></td>
-            <td class="actions"><button title="Edit">✏️</button><button title="Remove">🗑️</button></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- MOBILE CARD VIEW -->
-      <div style="margin-top:18px">
-        <div class="cards-grid">
-          <div class="p-card">
-            <h3>Nitrile Gloves (100pcs)</h3>
-            <div class="meta">Code DC-001 • Consumables</div>
-            <div style="margin-top:10px;font-weight:700;color:var(--accent-1)">120 pcs • In Stock</div>
-          </div>
-
-          <div class="p-card">
-            <h3>Sterilization Pouches</h3>
-            <div class="meta">Code DC-014 • Sterilization</div>
-            <div style="margin-top:10px;font-weight:700;color:#a16a00">18 pack • Low Stock</div>
-          </div>
-
-          <div class="p-card">
-            <h3>Lidocaine 2% Cartridge</h3>
-            <div class="meta">Code DC-099 • Anesthetics</div>
-            <div style="margin-top:10px;font-weight:700;color:#922626">0 box • Out</div>
-          </div>
-        </div>
-      </div>
-
-    </main>
+    <button onclick="addStock()">Add Stock</button>
   </div>
 
-  <script src="prod_stocking.js"></script>
+  <div class="table-box">
+    <h2>Current Stock Levels</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Supply Name</th>
+          <th>Category</th>
+          <th>Brand</th>
+          <th>Supplier</th>
+          <th>Stock</th>
+        </tr>
+      </thead>
+      <tbody id="stockTable"></tbody>
+    </table>
+  </div>
 
+  <script>
+    // ===== Load Data from Product Maintenance (localStorage) =====
+    const supplies = JSON.parse(localStorage.getItem('supplies')) || [];
+    const categories = JSON.parse(localStorage.getItem('categories')) || [];
+    const brands = JSON.parse(localStorage.getItem('brands')) || [];
+    const suppliers = JSON.parse(localStorage.getItem('suppliers')) || [];
+
+    // Stock Storage
+    const stock = JSON.parse(localStorage.getItem('stock')) || {}; // { supplyId: qty }
+
+    const supplySelect = document.getElementById('supplySelect');
+    const stockTable = document.getElementById('stockTable');
+
+    // Populate dropdown list from Product Maintenance
+    function loadSuppliesDropdown() {
+      supplySelect.innerHTML = '<option value="">Select Supply</option>';
+      supplies.forEach(s => {
+        if (s.active) {
+          supplySelect.innerHTML += <option value="${s.id}">${s.name}</option>;
+        }
+      });
+    }
+
+    // Add stock logic
+    function addStock() {
+      const supplyId = supplySelect.value;
+      const qty = parseInt(document.getElementById('qtyInput').value);
+
+      if (!supplyId || !qty || qty <= 0) {
+        alert('Please select a supply and enter a valid quantity.');
+        return;
+      }
+
+      stock[supplyId] = (stock[supplyId] || 0) + qty;
+
+      localStorage.setItem('stock', JSON.stringify(stock));
+
+      document.getElementById('qtyInput').value = '';
+      loadStockTable();
+    }
+
+    // Build stock table UI
+    function loadStockTable() {
+      stockTable.innerHTML = '';
+
+      supplies.forEach(s => {
+        if (!s.active) return;
+
+        const category = categories.find(c => c.id === s.category) || { name: '-' };
+        const brand = brands.find(b => b.id === s.brand) || { name: '-' };
+        const supplier = suppliers.find(sp => sp.id === s.supplier) || { name: '-' };
+
+        const qty = stock[s.id] || 0;
+
+        stockTable.innerHTML += `
+          <tr>
+            <td>${s.name}</td>
+            <td>${category.name}</td>
+            <td>${brand.name}</td>
+            <td>${supplier.name}</td>
+            <td>${qty}</td>
+          </tr>
+        `;
+      });
+    }
+
+    // Initialize
+    loadSuppliesDropdown();
+    loadStockTable();
+  </script>
 </body>
 </html>
