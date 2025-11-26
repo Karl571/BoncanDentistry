@@ -9,6 +9,7 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
+<<<<<<< HEAD
 <style>
   .services-section {
   padding: 80px 0;
@@ -91,6 +92,8 @@
 
 
   </style>
+=======
+>>>>>>> clurt
 <body>
   <!-- Navigation -->
   <nav>
@@ -177,6 +180,7 @@
 
 
   <!-- Our Services Section -->
+<<<<<<< HEAD
  <section class="services-section" id="services">
   <h2 class="services-title">Our Services</h2>
 
@@ -211,6 +215,62 @@
       <h3>Regular Consultation</h3>
     </div>
 
+=======
+<section class="services" id="services">
+  <div class="services-header">
+    <h2>Our Services</h2>
+    <div class="line"></div>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="img-box">
+        <div class="accent"></div>
+        <div class="photo" style="background-image: url('images/tmd.jpg');"></div>
+      </div>
+      <p>TMD Consult<br>Jaw (panga)</p>
+    </div>
+
+    <div class="service-card">
+      <div class="img-box">
+        <div class="accent"></div>
+        <div class="photo" style="background-image: url('images/cleaning.jpg');"></div>
+      </div>
+      <p>Oral Prophylaxis<br>(Cleaning)</p>
+    </div>
+
+    <div class="service-card">
+      <div class="img-box">
+        <div class="accent"></div>
+        <div class="photo" style="background-image: url('images/filling.jpg');"></div>
+      </div>
+      <p>Filling<br>(Pasta)</p>
+    </div>
+
+    <div class="service-card">
+      <div class="img-box">
+        <div class="accent"></div>
+        <div class="photo" style="background-image: url('images/extraction.jpg');"></div>
+      </div>
+      <p>Extraction<br>(Bunot)</p>
+    </div>
+
+    <div class="service-card">
+      <div class="img-box">
+        <div class="accent"></div>
+        <div class="photo" style="background-image: url('images/denture.jpg');"></div>
+      </div>
+      <p>Denture<br>(Pustiso)</p>
+    </div>
+
+    <div class="service-card">
+      <div class="img-box">
+        <div class="accent"></div>
+        <div class="photo" style="background-image: url('images/consultation.jpg');"></div>
+      </div>
+      <p>Regular<br>Consultation</p>
+    </div>
+>>>>>>> clurt
   </div>
 </section>
 
@@ -324,6 +384,7 @@
     </div>
   </div>
 </section>
+<<<<<<< HEAD
 
 
 <footer class="footer">
@@ -338,6 +399,8 @@
   </div>
 </footer>
 
+=======
+>>>>>>> clurt
 <script src="assets/js/faq.js" defer></script>
 
 

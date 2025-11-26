@@ -278,10 +278,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 contentHTML = `<div style="color:red;padding:10px;">Error loading ${moduleName}: ${error.message}</div>`;
             }
         }
+<<<<<<< HEAD
          else if (moduleName === "Customer Dashboard") {
             // Load the HTML content for Account Maintenance
             try {
                 const response = await fetch('patient_dashboard.html');
+=======
+        else if (moduleName === "Patient Dashboard") {
+            // Load the HTML content for Account Maintenance
+            try {
+                const response = await fetch('pdashboard.html');
                 if (response.ok) {
                     contentHTML = await response.text();
                 } else {
@@ -292,6 +298,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 contentHTML = `<div style="color:red;padding:10px;">Error loading ${moduleName}: ${error.message}</div>`;
             }
         }
+        else if (moduleName === "Doctors Module") {
+            // Load the HTML content for Account Maintenance
+            try {
+                const response = await fetch('doctors_module.html');
+>>>>>>> clurt
+                if (response.ok) {
+                    contentHTML = await response.text();
+                } else {
+                    throw new Error(`Failed to load: ${response.statusText}`);
+                }
+            } catch (error) {
+                console.error(`Error loading module ${moduleName}:`, error);
+                contentHTML = `<div style="color:red;padding:10px;">Error loading ${moduleName}: ${error.message}</div>`;
+            }
+        }
+<<<<<<< HEAD
        else if (moduleName.includes("Customer Dashboard") || moduleName.includes("Patient Dashboard")) {
     try {
         const response = await fetch('patient_dashboard.html');
@@ -348,6 +370,8 @@ else if (moduleName.includes("Customer Profile") || moduleName.includes("Profile
 }
 
         
+=======
+>>>>>>> clurt
         // Add more module loading logic here as needed...
         else {
             contentHTML = `<div class="module-content"><h2>${moduleName}</h2><p>Module content placeholder.</p></div>`;
@@ -464,7 +488,10 @@ else if (moduleName.includes("Customer Profile") || moduleName.includes("Profile
             const servicesRows = [];
             const maintenanceRows = [];
             const otherRows = [];
+<<<<<<< HEAD
             const customerRows = [];
+=======
+>>>>>>> clurt
 
             // Grouping logic (Based on module name)
             data.modules.forEach(row => {
@@ -472,6 +499,7 @@ else if (moduleName.includes("Customer Profile") || moduleName.includes("Profile
                     analyticsRows.push(row);
                 } else if (row.module.includes("Maintenance")) {
                     maintenanceRows.push(row);
+<<<<<<< HEAD
                 }else if (row.module.startsWith("Customer") || row.module.includes("Customer")) { 
                  customerRows.push(row);   
                 }else if (row.module.includes("Doctor")||row.module.includes("Transaction")|| row.module.includes("Request")|| row.module.includes("Logs")) {
@@ -479,6 +507,13 @@ else if (moduleName.includes("Customer Profile") || moduleName.includes("Profile
                 } else if (row.module.includes("Stocking")) {
                     inventoryRows.push(row);
                 }else { 
+=======
+                } else if (row.module.includes("Doctor")||row.module.includes("Transaction")|| row.module.includes("Request")|| row.module.includes("Logs")) {
+                    transactionRows.push(row);
+                } else if (row.module.includes("Stocking")) {
+                    inventoryRows.push(row);
+                } else {
+>>>>>>> clurt
                     otherRows.push(row);
                 }
             });
@@ -487,7 +522,10 @@ else if (moduleName.includes("Customer Profile") || moduleName.includes("Profile
             addGroup("Analytics", analyticsRows);
             addGroup("Maintenance", maintenanceRows);
             addGroup("Inventory", inventoryRows);
+<<<<<<< HEAD
             addGroup("Customer", customerRows);
+=======
+>>>>>>> clurt
             addGroup("Transaction", transactionRows); 
             addGroup("Other", otherRows);
 
@@ -523,5 +561,9 @@ else if (moduleName.includes("Customer Profile") || moduleName.includes("Profile
             window.location.href = '../index.php'; 
         }
     });
+<<<<<<< HEAD
     z
+=======
+    
+>>>>>>> clurt
 });

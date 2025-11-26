@@ -24,7 +24,10 @@ body {
   background: var(--background);
   line-height: 1.6;
   scroll-behavior: smooth;
+<<<<<<< HEAD
   background-color: red;
+=======
+>>>>>>> clurt
   
 }
 /* Navigation Bar */
@@ -122,6 +125,10 @@ nav {
   gap: 0.75rem;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> clurt
 .btn {
   padding: 0.5rem 1rem;
   border-radius: 0.375rem;
@@ -142,7 +149,11 @@ nav {
 }
 
 .btn-ghost:hover {
+<<<<<<< HEAD
   background: rgba(0, 0, 0, 0.03);
+=======
+  background-color: rgba(0, 0, 0, 0.03);
+>>>>>>> clurt
 }
 
 .btn-primary {

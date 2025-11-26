@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sessionStorage.setItem('user', JSON.stringify(data.user));
 
             // Redirect to the main admin view
+<<<<<<< HEAD
             const roleId = data.user.RoleId;
 
 if (roleId == 1) {
@@ -77,6 +78,9 @@ else {
     alert("Unknown user role.");
 }
 
+=======
+            window.location.href = 'modules/admin_vw.html'; 
+>>>>>>> clurt
 
         } catch (error) {
             console.error("Network or processing error during login:", error);
