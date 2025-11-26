@@ -179,10 +179,6 @@ class SQLConnection
         $fullName = trim("{$user['firstname']} {$user['middlename']} {$user['surname']}");
 
         return [
-<<<<<<< HEAD
-             
-=======
->>>>>>> clurt
             'FullName' => $fullName,
             'RoleId' => $user['role_id'],
             'RoleName' => $user['role_name'],
@@ -259,11 +255,4 @@ class SQLConnection
             return false;
         }
     }
-<<<<<<< HEAD
-    
 }
-
-
-=======
-}
->>>>>>> clurt
