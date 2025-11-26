@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Doctor's Module</title>
+<style>
+  body { 
+    font-family: Arial, sans-serif; background:#f4f9fb; 
+}
+  h1 { 
+    color:#1B5C62; 
+}
+  .section { 
+    background:#fff; padding:20px;
+    margin-bottom:25px; 
+    border-radius:10px; 
+    box-shadow:0 3px 8px rgba(0,0,0,0.1); 
+}
+  label { 
+    font-weight:bold; 
+}
+  input, select, textarea { 
+    width:100%; 
+    padding:10px; 
+    margin:5px 0 15px; 
+    border:1px solid #ccc; 
+    border-radius:5px; 
+}
+  button { 
+    padding:10px 20px; 
+    background:#1B5C62; 
+    border:none; 
+    color:#fff; 
+    border-radius:5px; 
+    cursor:pointer; 
+}
+  table { 
+    width:100%; 
+    border-collapse:collapse; 
+}
+  th, td { 
+    padding:10px; 
+    border-bottom:1px solid #ccc; 
+}
+  th { 
+    background:#1B5C62; 
+    color:white; 
+    }
+</style>
+</head>
+<body>
+<h1>Doctor's Module</h1>
+
+<!-- Availability Module -->
+<div class="section">
+  <h2>Availability Module</h2>
+  <label>Date</label>
+  <input type="date" id="availDate" />
+
+  <label>Start Time</label>
+  <input type="time" id="startTime" />
+
+  <label>End Time</label>
+  <input type="time" id="endTime" />
+
+  <button onclick="addAvailability()">Add Availability</button>
+  
+  <h3>Available Schedules</h3>
+  <table>
+    <thead><tr><th>Date</th><th>Time</th></tr></thead>
+    <tbody id="availTable"></tbody>
+  </table>
+</div>
+
+<!-- Appointment Approval Module -->
+<div class="section">
+  <h2>Appointment Approval Module</h2>
+  <table>
+    <thead>
+      <tr><th>Patient</th><th>Date</th><th>Time</th><th>Action</th></tr>
+    </thead>
+    <tbody id="apptTable"></tbody>
+  </table>
+</div>
+
+<!-- Patient Records Module -->
+<div class="section">
+  <h2>Patient Records</h2>
+  <label>Search Patient</label>
+  <input type="text" id="patientSearch" onkeyup="loadPatients()" placeholder="Enter patient name" />
+
+  <table>
+    <thead><tr><th>Name</th><th>History</th></tr></thead>
+    <tbody id="patientTable"></tbody>
+  </table>
+</div>
+
+<!-- List of Materials -->
+<div class="section">
+  <h2>Materials Used per Visit</h2>
+  <label>Patient</label>
+  <select id="matPatient"></select>
+
+  <label>Material</label>
+  <input type="text" id="materialName" placeholder="Ex: Anesthetic, Gloves" />
+
+  <label>Quantity</label>
+  <input type="number" id="materialQty" />
+
+  <button onclick="addMaterial()">Add Material</button>
+
+  <h3>Materials Log</h3>
+  <table>
+    <thead><tr><th>Patient</th><th>Material</th><th>Qty</th></tr></thead>
+    <tbody id="materialTable"></tbody>
+  </table>
+</div>
+
+<!-- List of Services -->
+<div class="section">
+  <h2>Services Rendered</h2>
+  <label>Patient</label>
+  <select id="servPatient"></select>
+
+  <label>Service</label>
+  <input type="text" id="serviceName" placeholder="Ex: Cleaning, Extraction" />
+
+  <button onclick="addService()">Add Service</button>
+
+  <h3>Service Log</h3>
+  <table>
+    <thead><tr><th>Patient</th><th>Service</th></tr></thead>
+    <tbody id="serviceTable"></tbody>
+  </table>
+</div>
+
+<script>
+// ===== DATA STORAGE =====
+let availability = JSON.parse(localStorage.getItem('availability')) || [];
+let appointments = JSON.parse(localStorage.getItem('appointments')) || [
+  {id:1, patient:'Juan Dela Cruz', date:'2025-01-10', time:'10:00'},
+  {id:2, patient:'Maria Santos', date:'2025-01-11', time:'14:00'}
+];
+let patients = JSON.parse(localStorage.getItem('patients')) || [
+  {name:'Juan Dela Cruz', history:'Cleaning last visit.'},
+  {name:'Maria Santos', history:'Tooth extraction history.'}
+];
+let materials = JSON.parse(localStorage.getItem('materials')) || [];
+let services = JSON.parse(localStorage.getItem('services')) || [];
+
+// ===== AVAILABILITY =====
+function addAvailability() {
+  let date = availDate.value;
+  let start = startTime.value;
+  let end = endTime.value;
+
+  if(!date || !start || !end){ alert('Complete the fields.'); return; }
+
+  availability.push({date, start, end});
+  localStorage.setItem('availability', JSON.stringify(availability));
+  loadAvailability();
+}
+
+function loadAvailability() {
+  availTable.innerHTML = '';
+  availability.forEach(a => {
+    availTable.innerHTML += `<tr><td>${a.date}</td><td>${a.start} - ${a.end}</td></tr>`;
+  });
+}
+
+// ===== APPOINTMENT APPROVAL =====
+function loadAppointments() {
+  apptTable.innerHTML = '';
+  appointments.forEach(a => {
+    apptTable.innerHTML += `
+      <tr>
+        <td>${a.patient}</td>
+        <td>${a.date}</td>
+        <td>${a.time}</td>
+        <td>
+          <button onclick="approve(${a.id})">Approve</button>
+          <button onclick="reject(${a.id})" style="background:#b33">Reject</button>
+        </td>
+      </tr>`;
+  });
+}
+
+function approve(id) {
+  appointments = appointments.filter(a => a.id !== id);
+  localStorage.setItem('appointments', JSON.stringify(appointments));
+  loadAppointments();
+}
+
+function reject(id) {
+  appointments = appointments.filter(a => a.id !== id);
+  localStorage.setItem('appointments', JSON.stringify(appointments));
+  loadAppointments();
+}
+
+// ===== PATIENT RECORDS =====
+function loadPatients() {
+  let search = patientSearch.value.toLowerCase();
+  patientTable.innerHTML = '';
+
+  patients
+    .filter(p => p.name.toLowerCase().includes(search))
+    .forEach(p => {
+      patientTable.innerHTML += `<tr><td>${p.name}</td><td>${p.history}</td></tr>`;
+    });
+}
+
+// Populate patient dropdowns
+function loadPatientDropdowns() {
+  matPatient.innerHTML = '';
+  servPatient.innerHTML = '';
+
+  patients.forEach(p => {
+    matPatient.innerHTML += `<option value="${p.name}">${p.name}</option>`;
+    servPatient.innerHTML += `<option value="${p.name}">${p.name}</option>`;
+  });
+}
+
+// ===== MATERIALS LOG =====
+function addMaterial() {
+  let patient = matPatient.value;
+  let name = materialName.value;
+  let qty = materialQty.value;
+
+  if(!patient || !name || !qty){ alert('Complete all fields'); return; }
+
+  materials.push({patient, name, qty});
+  localStorage.setItem('materials', JSON.stringify(materials));
+  loadMaterials();
+}
+
+function loadMaterials() {
+  materialTable.innerHTML = '';
+  materials.forEach(m => {
+    materialTable.innerHTML += `<tr><td>${m.patient}</td><td>${m.name}</td><td>${m.qty}</td></tr>`;
+  });
+}
+
+// ===== SERVICE LOG =====
+function addService() {
+  let patient = servPatient.value;
+  let name = serviceName.value;
+  if(!patient || !name){ alert('Complete fields'); return; }
+
+  services.push({patient, name});
+  localStorage.setItem('services', JSON.stringify(services));
+  loadServices();
+}
+
+function loadServices() {
+  serviceTable.innerHTML = '';
+  services.forEach(s => {
+    serviceTable.innerHTML += `<tr><td>${s.patient}</td><td>${s.name}</td></tr>`;
+  });
+}
+
+// INIT
+loadAvailability();
+loadAppointments();
+loadPatients();
+loadPatientDropdowns();
+loadMaterials();
+loadServices();
+</script>
+
+</body>
+</html>

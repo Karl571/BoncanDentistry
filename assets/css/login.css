@@ -1,0 +1,160 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background-color: #004d4d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    background-color: #006666;
+    border-radius: 15px;
+    overflow: hidden;
+    width: 800px;
+    height: 400px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+.login-box {
+    background-color: #e0e0e0;
+    flex: 1;
+    padding: 40px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-box h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 8px 30px 8px 5px;
+    border: none;
+    border-bottom: 1px solid #666;
+    background: transparent;
+    outline: none;
+}
+
+.input-group .icon {
+    position: absolute;
+    right: 5px;
+    bottom: 8px;
+    font-size: 16px;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #00c4b3;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #222;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    background-color: #00a799;
+}
+
+.register-text {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 13px;
+    color: #333;
+}
+
+.register-text a {
+    color: #006666;
+    text-decoration: none;
+}
+
+.register-text a:hover {
+    text-decoration: underline;
+}
+
+.welcome-box {
+    flex: 1;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.welcome-box h1 {
+    font-size: 40px;
+    text-align: center;
+}
+
+.welcome-box span {
+    display: flex;
+    font-weight: normal;
+}
+
+.circles {
+    position: absolute;
+    top: 80%;
+    left: 30%;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 1;
+}
+
+.circle.one {
+    width: 60px;
+    height: 60px;
+    background-color: #18b89e;
+    top: -90px;
+    left: 130px;
+}
+
+.circle.two {
+    width: 20px;
+    height: 20px;
+    background-color: #2adfc2;
+    top: -80px;
+    left: 105px;
+}
+
+.circle.three {
+    width: 60px;
+    height: 60px;
+    background-color: #0b4c4a;
+    top: -55px;
+    left: 100px;
+}
+
+
+

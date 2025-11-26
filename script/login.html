@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boncan Dentistry Login</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            
+            <div class="header-panel">
+                <h2>Ricardo B. Boncan Dentistry and Oral Surgery</h2>
+            </div>
+
+            <div class="clock-panel">
+                <label id="lblTime">--:--:--</label>
+                <label id="lblDate">-- -- --</label>
+            </div>
+
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="txtUsername">Username</label>
+                    <input type="text" id="txtUsername" name="username" class="login-input" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="txtPassword">Password</label>
+                    <input type="password" id="txtPassword" name="password" class="login-input" required>
+                </div>
+                
+                <div class="button-group">
+                    <button type="submit" id="btnLogin" class="btn-login">LOGIN</button>
+                    <a href="#" id="lblCancel" class="lbl-cancel">Cancel / Exit</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="script/login.js"></script>
+</body>
+</html>

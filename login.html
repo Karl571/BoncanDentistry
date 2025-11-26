@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="assets/css/login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <h2>LogIn</h2>
+
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="txtUsername">Username</label>
+                    <input type="text" id="txtUsername" name="username" required>
+                    <span class="icon">👤</span>
+                </div>
+
+                <div class="input-group">
+                    <label for="txtPassword">Password</label>
+                    <input type="password" id="txtPassword" name="password" required>
+                    <span class="icon">🔒</span>
+                </div>
+
+               <button type="submit" id="btnLogin" class="login-btn">LogIn</button>                
+            </form>
+                <p class="register-text">
+                    Don’t have an account? 
+                    <a href="register.php">Register here</a>               
+                </p>
+        </div>
+
+        <div class="welcome-box">
+            <h1>WELCOME<br><span>BACK!</span></h1>
+            <div class="circles">
+                <div class="circle one"></div>
+                <div class="circle two"></div>
+                <div class="circle three"></div>
+            </div>
+        </div>
+    </div>
+
+ <script src="script/login.js"></script>
+
+
+</body>
+</html>

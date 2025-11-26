@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Stocking</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f9fb;
+    }
+    h1 {
+      color: #1B5C62;
+      margin-bottom: 20px;
+    }
+
+    .form-box, .table-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      margin-bottom: 25px;
+    }
+
+    label { font-weight: bold; }
+
+    input, select {
+      padding: 10px;
+      width: 100%;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #1B5C62;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+      text-align: left;
+    }
+    th {
+      background: #1B5C62;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>Product Stocking</h1>
+
+  <div class="form-box">
+    <h2>Add / Restock Supply</h2>
+
+    <label>Supply Item</label>
+    <select id="supplySelect"></select>
+
+    <label>Quantity to Add</label>
+    <input type="number" id="qtyInput" placeholder="Enter quantity" />
+
+    <button onclick="addStock()">Add Stock</button>
+  </div>
+
+  <div class="table-box">
+    <h2>Current Stock Levels</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Supply Name</th>
+          <th>Category</th>
+          <th>Brand</th>
+          <th>Supplier</th>
+          <th>Stock</th>
+        </tr>
+      </thead>
+      <tbody id="stockTable"></tbody>
+    </table>
+  </div>
+
+  <script>
+    // ===== Load Data from Product Maintenance (localStorage) =====
+    const supplies = JSON.parse(localStorage.getItem('supplies')) || [];
+    const categories = JSON.parse(localStorage.getItem('categories')) || [];
+    const brands = JSON.parse(localStorage.getItem('brands')) || [];
+    const suppliers = JSON.parse(localStorage.getItem('suppliers')) || [];
+
+    // Stock Storage
+    const stock = JSON.parse(localStorage.getItem('stock')) || {}; // { supplyId: qty }
+
+    const supplySelect = document.getElementById('supplySelect');
+    const stockTable = document.getElementById('stockTable');
+
+    // Populate dropdown list from Product Maintenance
+    function loadSuppliesDropdown() {
+      supplySelect.innerHTML = '<option value="">Select Supply</option>';
+      supplies.forEach(s => {
+        if (s.active) {
+          supplySelect.innerHTML += `<option value="${s.id}">${s.name}</option>`;
+        }
+      });
+    }
+
+    // Add stock logic
+    function addStock() {
+      const supplyId = supplySelect.value;
+      const qty = parseInt(document.getElementById('qtyInput').value);
+
+      if (!supplyId || !qty || qty <= 0) {
+        alert('Please select a supply and enter a valid quantity.');
+        return;
+      }
+
+      stock[supplyId] = (stock[supplyId] || 0) + qty;
+
+      localStorage.setItem('stock', JSON.stringify(stock));
+
+      document.getElementById('qtyInput').value = '';
+      loadStockTable();
+    }
+
+    // Build stock table UI
+    function loadStockTable() {
+      stockTable.innerHTML = '';
+
+      supplies.forEach(s => {
+        if (!s.active) return;
+
+        const category = categories.find(c => c.id === s.category) || { name: '-' };
+        const brand = brands.find(b => b.id === s.brand) || { name: '-' };
+        const supplier = suppliers.find(sp => sp.id === s.supplier) || { name: '-' };
+
+        const qty = stock[s.id] || 0;
+
+        stockTable.innerHTML += `
+          <tr>
+            <td>${s.name}</td>
+            <td>${category.name}</td>
+            <td>${brand.name}</td>
+            <td>${supplier.name}</td>
+            <td>${qty}</td>
+          </tr>
+        `;
+      });
+    }
+
+    // Initialize
+    loadSuppliesDropdown();
+    loadStockTable();
+  </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<div class="account-maintenance-container">
+    <h2 class="section-title">👤 Account Maintenance</h2>
+    
+    <!-- Controls Top -->
+    <div class="controls-panel top-controls">
+        <div class="right-controls">
+            <button id="btnAddAccount" class="btn-add">➕ Add Account</button>
+            <button id="btnAddrole" class="btn-add">🔑 Add Role</button>
+        </div>
+    </div>
+
+    <!-- Add Account Panel -->
+    <div id="pnlAddAccount" class="add-account-panel hidden">
+        <h3 class="sub-title">Add New Account</h3>
+
+        <div class="form-group">
+            <div class="form-row">
+                <div class="form-column">
+                    <label for="txtFirstname">First Name</label>
+                    <input type="text" id="txtFirstname" placeholder="Enter first name" required>
+                </div>
+                <div class="form-column">
+                    <label for="txtMiddlename">Middle Name <small>(Optional)</small></label>
+                    <input type="text" id="txtMiddlename" placeholder="Enter middle name">
+                </div>
+                <div class="form-column">
+                    <label for="txtSurname">Surname</label>
+                    <input type="text" id="txtSurname" placeholder="Enter surname" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-column">
+                    <label for="cmbRole">Role</label>
+                    <select id="cmbRole" required></select>
+                </div>
+                <div class="form-column">
+                    <label for="txtUsername">Username</label>
+                    <input type="text" id="txtUsername" placeholder="Choose a username" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-column">
+                    <label for="txtPassword">Password</label>
+                    <input type="password" id="txtPassword" placeholder="Enter password" required>
+                </div>
+                <div class="form-column">
+                    <label for="txtConfirmPassword">Confirm Password</label>
+                    <input type="password" id="txtConfirmPassword" placeholder="Re-enter password" required>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button id="btnSaveAccount" class="btn-form-action btn-save">💾 Save Account</button>
+                <button id="btnCancelAdd" class="btn-form-action btn-cancel">❌ Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters and Search -->
+    <div class="controls-panel bottom-controls">
+        <div class="left-controls">
+            <div class="search-group">
+                <label for="txtSearch">🔍 Search:</label>
+                <input type="text" id="txtSearch" placeholder="Name, Username, Role...">
+            </div>
+        </div>
+
+        <div class="center-controls">
+            <div class="filter-group">
+                <label for="cmbFilter">📋 Filter by Role:</label>
+                <select id="cmbFilter"></select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="grid-tabs">
+        <label id="lblActiveAccounts" class="tab-active">Active Accounts</label>
+        <label id="lblArchivedAccounts" class="tab-inactive">Archived Accounts</label>
+    </div>
+
+    <!-- Data Grid -->
+    <div class="grid-container">
+        <table id="dataGridActive" class="data-grid" style="display: table;"></table>
+        <table id="dataGridArchived" class="data-grid" style="display: none;"></table>
+    </div>
+</div>
+
+<link rel="stylesheet" href="../style/acc_maintenance.css">
+<script src="../script/acc_maintainance.js"></script>

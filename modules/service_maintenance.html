@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Service Maintenance — Dental Appointment System</title>
+  <style>
+    :root{
+      --bg: #f4f9fb;
+      --card: #ffffff;
+      --accent: #1b5c62;
+      --accent-2: #348493;
+      --muted: #6b7b81;
+      --danger: #e06a6a;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      background:var(--bg);
+      color:#163334;
+      margin:0;
+    }
+
+    .container{
+      max-width:1100px;
+      margin:0 auto;
+    }
+
+    header{
+      display:flex;
+      gap:20px;
+      align-items:center;
+      margin-bottom:18px
+    }
+
+    header h1{
+      font-size:20px;
+      margin:0
+    }
+    header p{
+      margin:2px 0 0;
+      color:var(--muted);
+      font-size:13px
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:18px
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:12px;
+      padding:18px;
+      box-shadow:0 6px 20px rgba(15,23,25,0.04)
+    }
+
+    .toolbar{
+      display:flex; 
+      gap:10px; 
+      align-items:center; 
+      margin-bottom:12px
+    }
+    .search{
+      flex:1
+    }
+    .search input{
+      width:100%;
+      padding:10px 12px;
+      border-radius:10px; 
+      border:1px solid #e6eef0
+    }
+    .btn{
+      background:var(--accent); 
+      color:white; 
+      border:none;
+      padding:10px 14px; 
+      border-radius:10px; 
+      cursor:pointer
+    }
+    .btn.secondary{
+      background:transparent; 
+      border:1px solid var(--accent); 
+      color:var(--accent)
+    }
+
+    table{
+      width:100%; 
+      border-collapse:collapse; 
+      margin-top:6px
+    }
+    th,td{
+      padding:10px 8px; 
+      text-align:left; 
+      font-size:14px
+    }
+    thead th{
+      color:var(--muted); 
+      font-size:12px
+    }
+    tbody tr + tr{
+      border-top:1px solid #eef6f7
+    }
+
+    .tag{
+      display:inline-block; 
+      padding:6px 8px; 
+      border-radius:8px; 
+      font-size:12px; 
+      background:#f2fbff; 
+      color:var(--accent-2)
+    }
+
+    .actions{
+      display:flex; 
+      gap:8px
+    }
+    .icon-btn{
+      background:#f6fafb; 
+      border:1px solid #e9f2f3; 
+      padding:6px 8px; 
+      border-radius:8px; 
+      cursor:pointer
+    }
+    .muted{
+      color:var(--muted); 
+      font-size:13px
+    }
+
+    form h2{
+      margin-top:0; 
+      margin-bottom:8px
+    }
+    .field{
+      margin-bottom:12px
+    }
+    label{
+      display:block; 
+      font-size:13px; 
+      margin-bottom:6px; 
+      color:var(--muted)
+    }
+    input[type="text"], textarea, input[type="number"], select{
+      width:100%; 
+      padding:10px 12px; 
+      border-radius:8px; 
+      border:1px solid #e6eef0
+    }
+    textarea{
+      min-height:90px; 
+      resize:vertical
+    }
+
+    .small{
+      font-size:13px; 
+      color:var(--muted)
+    }
+    .row{
+      display:flex;
+       gap:10px
+      }
+    .row > *{
+      flex:1
+    }
+
+    .switch{
+      display:inline-flex; 
+      align-items:center; 
+      gap:8px
+    }
+    .switch input{
+      appearance:none; 
+      width:44px; 
+      height:24px; 
+      background:#e7f3f4; 
+      border-radius:30px; 
+      position:relative; 
+      outline:none; 
+      cursor:pointer
+    }
+    .switch input:after{
+      content:'';
+     width:18px; 
+     height:18px; 
+     background:white; 
+     border-radius:50%; 
+     position:absolute; 
+     left:3px; 
+     top:3px; 
+     transition:all .18s
+    }
+    .switch input:checked{
+      background:var(--accent)
+    }
+    .switch input:checked:after{
+      left:23px
+    }
+
+    footer{
+      margin-top:14px; 
+      display:flex; 
+      gap:10px
+    }
+
+    .empty{
+      padding:30px; 
+      text-align:center; 
+      color:var(--muted)
+    }
+
+    @media (max-width:880px){
+      .grid{grid-template-columns:1fr}
+      header{flex-direction:column; align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <!-- image removed -->
+      <div>
+        <h1>Service Maintenance</h1>
+      </div>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <div class="toolbar">
+          <div class="search"><input id="q" placeholder="Search services..." oninput="renderList()" /></div>
+          <!-- Add Service removed -->
+          <button class="btn secondary" onclick="resetDemo()">Reset (demo)</button>
+        </div>
+
+        <div id="listWrap">
+          <table>
+            <thead>
+              <tr><th>Service</th><th>Fee</th><th>Availability</th><th style="width:120px">Actions</th></tr>
+            </thead>
+            <tbody id="serviceList"></tbody>
+          </table>
+        </div>
+
+        <div id="empty" class="empty" style="display:none">No services found. Add a new service to get started.</div>
+      </section>
+
+      <aside class="card">
+        <form id="serviceForm" onsubmit="event.preventDefault(); saveService();">
+          <h2 id="formTitle">Add new service</h2>
+
+          <div class="field">
+            <label for="name">Service name</label>
+            <input id="name" required placeholder="e.g. Teeth Whitening" />
+          </div>
+
+          <div class="field">
+            <label for="desc">Description</label>
+            <textarea id="desc" placeholder="Short description for patients"></textarea>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="fee">Fee (₱)</label>
+              <input id="fee" type="number" min="0" step="0.01" value="0" />
+            </div>
+            <div class="field">
+              <label for="category">Category</label>
+              <select id="category">
+                <option value="General">General</option>
+                <option value="Surgical">Surgical</option>
+                <option value="Cosmetic">Cosmetic</option>
+                <option value="Preventive">Preventive</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Available</label>
+            <label class="switch"><input type="checkbox" id="available" checked /><span class="small">Toggle to set availability</span></label>
+          </div>
+
+          <footer>
+            <button class="btn" type="submit">Save</button>
+            <button type="button" class="btn secondary" onclick="cancelEdit()">Cancel</button>
+          </footer>
+        </form>
+
+        <hr style="margin:12px 0; border:none; border-top:1px solid #eef6f7" />
+
+        <div>
+          <h3 style="margin:0 0 8px 0">Legend</h3>
+          <div class="small"><strong>Deactivate</strong> hides a service from booking but keeps its record. Use this for services no longer offered.</div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'dental_services_demo_v1';
+    let services = [];
+    let editingId = null;
+
+    const seed = [
+      {id: genId(), name:'Teeth Cleaning', desc:'Scaling and polishing', fee:800, category:'Preventive', available:true, active:true},
+      {id: genId(), name:'Tooth Extraction', desc:'Simple extraction (per tooth)', fee:1500, category:'Surgical', available:true, active:true},
+      {id: genId(), name:'Teeth Whitening', desc:'In-office whitening session', fee:3500, category:'Cosmetic', available:false, active:true}
+    ];
+
+    function genId(){return 's_'+Math.random().toString(36).slice(2,9)}
+
+    function load(){
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(raw){ 
+        services = JSON.parse(raw); 
+      }
+      else{ 
+        services = seed; save(); 
+      }
+      renderList();
+    }
+
+    function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(services)); }
+
+    function renderList(){
+      const q = document.getElementById('q').value.trim().toLowerCase();
+      const tbody = document.getElementById('serviceList');
+      tbody.innerHTML = '';
+      const filtered = services.filter(s => s.active && (s.name.toLowerCase().includes(q) || s.desc.toLowerCase().includes(q) || s.category.toLowerCase().includes(q)));
+
+      if(filtered.length===0){ 
+        document.getElementById('empty').style.display='block'; 
+        return; 
+      }
+      else{ 
+        document.getElementById('empty').style.display='none'; 
+      }
+
+      for(const s of filtered){
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>
+            <div style="font-weight:600">${escapeHtml(s.name)}</div>
+            <div class="muted small">${escapeHtml(s.category)} — ${escapeHtml(s.desc)}</div>
+          </td>
+          <td>₱ ${Number(s.fee).toFixed(2)}</td>
+          <td>${s.available ? '<span class="tag">Available</span>' : '<span class="muted">Not available</span>'}</td>
+          <td>
+            <div class="actions">
+              <button class="icon-btn" onclick="editService('${s.id}')">Edit</button>
+              <button class="icon-btn" onclick="toggleAvailability('${s.id}')">Toggle</button>
+              <button class="icon-btn" onclick="deactivate('${s.id}')" title="Deactivate">Deactivate</button>
+            </div>
+          </td>`;
+        tbody.appendChild(tr);
+      }
+    }
+
+    function escapeHtml(s){ 
+      return (s+'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); 
+    }
+
+    function saveService(){
+      const name = document.getElementById('name').value.trim();
+      if(!name) return alert('Service name is required');
+      const desc = document.getElementById('desc').value.trim();
+      const fee = Number(document.getElementById('fee').value) || 0;
+      const category = document.getElementById('category').value;
+      const available = document.getElementById('available').checked;
+
+      if(editingId){
+        const s = services.find(x=>x.id===editingId);
+        Object.assign(s,{name,desc,fee,category,available});
+        editingId = null;
+      } 
+      else {
+        services.unshift({id:genId(), name, desc, fee, category, available, active:true});
+      }
+      save(); renderList(); document.getElementById('serviceForm').reset();
+      document.getElementById('formTitle').innerText='Add new service';
+    }
+
+    function editService(id){
+      const s = services.find(x=>x.id===id);
+      if(!s) return;
+      editingId = id;
+      document.getElementById('formTitle').innerText='Edit service';
+      document.getElementById('name').value = s.name;
+      document.getElementById('desc').value = s.desc;
+      document.getElementById('fee').value = s.fee;
+      document.getElementById('category').value = s.category;
+      document.getElementById('available').checked = s.available;
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    function cancelEdit(){ 
+      editingId = null; 
+      document.getElementById('serviceForm').reset(); 
+      document.getElementById('formTitle').innerText='Add new service'; 
+    }
+
+    function toggleAvailability(id){
+      const s = services.find(x=>x.id===id);
+      if(!s) return; 
+      s.available = !s.available; save(); 
+      renderList();
+    }
+
+    function deactivate(id){
+      if(!confirm('Deactivate this service? It will no longer appear in booking lists.')) return;
+      const s = services.find(x=>x.id===id);
+      s.active = false; save(); renderList();
+    }
+
+    function resetDemo(){ 
+      if(!confirm('Reset demo data?')) return; 
+      localStorage.removeItem(STORAGE_KEY); 
+      load(); 
+    }
+
+    load();
+  </script>
+</body>
+</html>

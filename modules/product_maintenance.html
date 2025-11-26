@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Product Maintenance — Inventory</title>
+  <style>
+    :root{ 
+        --bg:#f6f8fb; 
+        --card:#fff; 
+        --accent:#1B5C62; 
+        --muted:#6b7280; 
+        --danger:#e11d48; 
+    }
+    *{
+        box-sizing:border-box;
+        font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial
+    }
+    body{
+        background:var(--bg);
+        margin:0;
+    }
+    .container{
+        max-width:1100px;
+        margin:0 auto
+    }
+    header{
+        display:flex;
+        align-items:center;
+        gap:16px;
+        margin-bottom:18px
+    }
+    header h1{
+        font-size:20px;
+        margin:0
+    }
+    .tabs{
+        display:flex;
+        gap:8px;
+        margin-bottom:18px
+    }
+    .tab{
+        background:var(--card);
+        padding:8px 12px;
+        border-radius:8px;
+        cursor:pointer;
+        border:1px solid rgba(15,23,42,0.06)
+    }
+    .tab.active{
+        box-shadow:0 4px 14px rgba(11,37,36,0.06);border-left:4px solid var(--accent)
+    }
+    .grid{
+        display:grid;
+        grid-template-columns:360px 1fr;
+        gap:18px
+    }
+
+    .card{
+        background:var(--card);
+        padding:14px;
+        border-radius:12px;
+        border:1px solid rgba(15,23,42,0.06)
+    }
+    form{
+        display:flex;
+        flex-direction:column;
+        gap:10px
+    }
+    label{
+        font-size:13px;
+        color:var(--muted)
+    }
+    input[type=text],select,textarea{
+        padding:10px;
+        border-radius:8px;
+        border:1px solid rgba(15,23,42,0.08);
+        outline:none
+    }
+    textarea{
+        resize:vertical
+    }
+    .btn{
+        display:inline-block;
+        padding:8px 12px;
+        border-radius:8px;
+        border:none;background:var(--accent);
+        color:white;
+        cursor:pointer
+    }
+    .btn.ghost{
+        background:transparent;
+        border:1px solid rgba(15,23,42,0.06);
+        color:var(--muted)
+    }
+    .list{
+        max-height:520px;
+        overflow:auto
+    }
+    table{
+        width:100%;
+        border-collapse:collapse
+    }
+    th,td{
+        padding:8px;text-align:left;
+        border-bottom:1px solid rgba(15,23,42,0.04)
+    }
+    th{
+        font-size:13px;
+        color:var(--muted)
+    }
+    td small{
+        display:block;
+        color:var(--muted);
+        font-size:12px
+    }
+    .row-actions{
+        display:flex;
+        gap:6px
+    }
+    .chip{
+        display:inline-block;
+        padding:4px 8px;border-radius:999px;
+        font-size:12px;
+        background:#f1f5f9;color:#0f172a
+    }
+    .inactive{
+        opacity:0.45
+    }
+    .footer-note{
+        font-size:12px;
+        color:var(--muted);
+        margin-top:8px
+    }
+    .top-controls{
+        display:flex;
+        gap:8px;
+        align-items:center
+    }
+    .search{
+        padding:8px;
+        border-radius:8px;
+        border:1px solid rgba(15,23,42,0.06)
+    }
+    .muted{
+        color:var(--muted)
+    }
+    @media (max-width:900px){
+        .grid{grid-template-columns:1fr;}
+        .card{padding:12px}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Product Maintenance — Admin</h1>
+      <div class="muted">Add / Update / Deactivate Categories, Suppliers, Brands & Supplies</div>
+    </header>
+
+    <div class="tabs" id="tabs">
+      <div class="tab active" data-module="categories">Supplies Category</div>
+      <div class="tab" data-module="brands">Brand</div>
+      <div class="tab" data-module="suppliers">Supplier</div>
+      <div class="tab" data-module="supplies">Supplies</div>
+    </div>
+
+    <div class="grid">
+      <div class="card" id="leftPanel">
+        <div id="formTitle"><strong>Add Category</strong></div>
+        <form id="mainForm">
+          <!-- dynamic fields -->
+        </form>
+        <div class="footer-note">Tip: Deactivating keeps history and prevents new stock operations. Data persists in your browser (localStorage).</div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <div style="display:flex;gap:8px;align-items:center">
+            <div class="top-controls">
+              <input class="search" id="searchInput" placeholder="Search..." />
+              <select id="filterActive"><option value="all">All</option><option value="active">Active</option><option value="inactive">Inactive</option></select>
+            </div>
+          </div>
+          <div class="muted">Showing <span id="count">0</span></div>
+        </div>
+
+        <div class="list" id="listArea">
+          <!-- table injected here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ---------- Storage keys ----------
+    const STORAGE_KEYS = {
+      categories: 'pm_categories',
+      brands: 'pm_brands',
+      suppliers: 'pm_suppliers',
+      supplies: 'pm_supplies'
+    };
+
+    // ---------- In-memory state ----------
+    let state = {
+      module: 'categories',
+      editId: null,
+      data: {categories: [], brands: [], suppliers: [], supplies: []},
+      filter: {q:'', status:'all'}
+    };
+
+    // ---------- Utilities ----------
+    function uid(prefix='id'){
+      return prefix + '_' + Math.random().toString(36).slice(2,9);
+    }
+
+    function loadStorage(){
+      for(const k of Object.keys(STORAGE_KEYS)){
+        const raw = localStorage.getItem(STORAGE_KEYS[k]);
+        try{ state.data[k] = raw ? JSON.parse(raw) : []; }catch(e){ state.data[k]=[] }
+      }
+    }
+
+    function saveStorage(key){
+      localStorage.setItem(STORAGE_KEYS[key], JSON.stringify(state.data[key]));
+    }
+
+    // ---------- Rendering / UI ----------
+    const tabsEl = document.getElementById('tabs');
+    const mainForm = document.getElementById('mainForm');
+    const formTitle = document.getElementById('formTitle');
+    const listArea = document.getElementById('listArea');
+    const searchInput = document.getElementById('searchInput');
+    const filterActive = document.getElementById('filterActive');
+    const countEl = document.getElementById('count');
+
+    tabsEl.addEventListener('click', (e)=>{ const t=e.target.closest('.tab'); if(!t) return; switchModule(t.dataset.module); })
+    searchInput.addEventListener('input', ()=>{ state.filter.q = searchInput.value.trim().toLowerCase(); renderList(); })
+    filterActive.addEventListener('change', ()=>{ state.filter.status = filterActive.value; renderList(); })
+
+    function switchModule(module){
+      state.module = module; state.editId = null; // reset edit
+      document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.module===module));
+      renderForm(); renderList();
+    }
+
+    function renderForm(){
+      mainForm.innerHTML = '';
+      const m = state.module;
+      formTitle.innerHTML = (state.editId ? '<strong>Edit</strong>' : '<strong>Add</strong>') + ' ' + titleize(m);
+
+      if(m === 'categories') renderCategoryForm();
+      if(m === 'brands') renderBrandForm();
+      if(m === 'suppliers') renderSupplierForm();
+      if(m === 'supplies') renderSuppliesForm();
+    }
+
+    function titleize(k){
+      if(k==='categories') return 'Category';
+      if(k==='brands') return 'Brand';
+      if(k==='suppliers') return 'Supplier';
+      if(k==='supplies') return 'Supply';
+      return k;
+    }
+
+    // ---- Forms ----
+    function el(label, inner){ const d=document.createElement(label); if(inner!==undefined) d.innerHTML=inner; return d }
+
+    function renderCategoryForm(){
+      mainForm.appendChild(el('label','<strong>Name</strong>'));
+      const name = el('input'); name.type='text'; name.id='cat_name'; name.placeholder='e.g., Consumables';
+      mainForm.appendChild(name);
+
+      mainForm.appendChild(el('label','<strong>Description</strong>'));
+      const desc = el('textarea'); desc.id='cat_desc'; desc.rows=3; desc.placeholder='Optional description';
+      mainForm.appendChild(desc);
+
+      const actions = el('div');
+      const submit = el('button','Save'); submit.type='button'; submit.className='btn'; submit.addEventListener('click', ()=>saveCategory());
+      const cancel = el('button','Cancel'); cancel.type='button'; cancel.className='btn ghost'; cancel.addEventListener('click', ()=>{ state.editId=null; renderForm(); });
+      actions.appendChild(submit); actions.appendChild(cancel);
+      mainForm.appendChild(actions);
+
+      if(state.editId){ const rec = state.data.categories.find(c=>c.id===state.editId); if(rec){ name.value=rec.name; desc.value=rec.description||''; } }
+    }
+
+    function renderBrandForm(){
+      mainForm.appendChild(el('label','<strong>Name</strong>'));
+      const name = el('input'); name.type='text'; name.id='brand_name'; name.placeholder='e.g., Colgate';
+      mainForm.appendChild(name);
+
+      mainForm.appendChild(el('label','<strong>Notes</strong>'));
+      const notes = el('textarea'); notes.id='brand_notes'; notes.rows=2; notes.placeholder='Optional notes';
+      mainForm.appendChild(notes);
+
+      const actions = el('div');
+      const submit = el('button','Save'); submit.type='button'; submit.className='btn'; submit.addEventListener('click', ()=>saveBrand());
+      const cancel = el('button','Cancel'); cancel.type='button'; cancel.className='btn ghost'; cancel.addEventListener('click', ()=>{ state.editId=null; renderForm(); });
+      actions.appendChild(submit); actions.appendChild(cancel);
+      mainForm.appendChild(actions);
+
+      if(state.editId){ const rec = state.data.brands.find(c=>c.id===state.editId); if(rec){ name.value=rec.name; notes.value=rec.notes||''; } }
+    }
+
+    function renderSupplierForm(){
+      mainForm.appendChild(el('label','<strong>Name</strong>'));
+      const name = el('input'); name.type='text'; name.id='sup_name'; name.placeholder='e.g., ABC Medical Supplies';
+      mainForm.appendChild(name);
+
+      mainForm.appendChild(el('label','<strong>Contact / Address</strong>'));
+      const contact = el('textarea'); contact.id='sup_contact'; contact.rows=2; contact.placeholder='Phone, email or address';
+      mainForm.appendChild(contact);
+
+      const actions = el('div');
+      const submit = el('button','Save'); submit.type='button'; submit.className='btn'; submit.addEventListener('click', ()=>saveSupplier());
+      const cancel = el('button','Cancel'); cancel.type='button'; cancel.className='btn ghost'; cancel.addEventListener('click', ()=>{ state.editId=null; renderForm(); });
+      actions.appendChild(submit); actions.appendChild(cancel);
+      mainForm.appendChild(actions);
+
+      if(state.editId){ const rec = state.data.suppliers.find(c=>c.id===state.editId); if(rec){ name.value=rec.name; contact.value=rec.contact||''; } }
+    }
+
+    function renderSuppliesForm(){
+      mainForm.appendChild(el('label','<strong>Name</strong>'));
+      const name = el('input'); name.type='text'; name.id='s_name'; name.placeholder='e.g., Latex Gloves (Medium)';
+      mainForm.appendChild(name);
+
+      mainForm.appendChild(el('label','<strong>Category</strong>'));
+      const cat = el('select'); cat.id='s_category'; cat.appendChild(new Option('-- choose category --',''));
+      state.data.categories.forEach(c=>cat.appendChild(new Option(c.name,c.id)));
+      mainForm.appendChild(cat);
+
+      mainForm.appendChild(el('label','<strong>Brand</strong>'));
+      const brand = el('select'); brand.id='s_brand'; brand.appendChild(new Option('-- choose brand --',''));
+      state.data.brands.forEach(b=>brand.appendChild(new Option(b.name,b.id)));
+      mainForm.appendChild(brand);
+
+      mainForm.appendChild(el('label','<strong>Supplier</strong>'));
+      const sup = el('select'); sup.id='s_supplier'; sup.appendChild(new Option('-- choose supplier --',''));
+      state.data.suppliers.forEach(s=>sup.appendChild(new Option(s.name,s.id)));
+      mainForm.appendChild(sup);
+
+      mainForm.appendChild(el('label','<strong>Notes / Details</strong>'));
+      const details = el('textarea'); details.id='s_details'; details.rows=2; details.placeholder='Optional details like unit, size, dosage';
+      mainForm.appendChild(details);
+
+      const actions = el('div');
+      const submit = el('button','Save'); submit.type='button'; submit.className='btn'; submit.addEventListener('click', ()=>saveSupply());
+      const cancel = el('button','Cancel'); cancel.type='button'; cancel.className='btn ghost'; cancel.addEventListener('click', ()=>{ state.editId=null; renderForm(); });
+      actions.appendChild(submit); actions.appendChild(cancel);
+      mainForm.appendChild(actions);
+
+      if(state.editId){ const rec = state.data.supplies.find(c=>c.id===state.editId); if(rec){ name.value=rec.name; cat.value=rec.categoryId||''; brand.value=rec.brandId||''; sup.value=rec.supplierId||''; details.value=rec.details||''; } }
+    }
+
+    // ---------- Save handlers ----------
+    function saveCategory(){
+      const name = document.getElementById('cat_name').value.trim();
+      const desc = document.getElementById('cat_desc').value.trim();
+      if(!name){alert('Name is required'); return}
+      if(state.editId){
+        const rec = state.data.categories.find(c=>c.id===state.editId); if(!rec) return; rec.name=name; rec.description=desc; rec.updated=Date.now();
+      } else {
+        state.data.categories.push({id:uid('cat'), name, description:desc, active:true, created:Date.now()});
+      }
+      saveStorage('categories'); state.editId=null; renderForm(); renderList();
+    }
+
+    function saveBrand(){
+      const name = document.getElementById('brand_name').value.trim();
+      const notes = document.getElementById('brand_notes').value.trim();
+      if(!name){alert('Name is required'); return}
+      if(state.editId){ const rec = state.data.brands.find(c=>c.id===state.editId); if(!rec) return; rec.name=name; rec.notes=notes; rec.updated=Date.now(); }
+      else state.data.brands.push({id:uid('brand'), name, notes, active:true, created:Date.now()});
+      saveStorage('brands'); state.editId=null; renderForm(); renderList();
+    }
+
+    function saveSupplier(){
+      const name = document.getElementById('sup_name').value.trim();
+      const contact = document.getElementById('sup_contact').value.trim();
+      if(!name){alert('Name is required'); return}
+      if(state.editId){ const rec = state.data.suppliers.find(c=>c.id===state.editId); if(!rec) return; rec.name=name; rec.contact=contact; rec.updated=Date.now(); }
+      else state.data.suppliers.push({id:uid('sup'), name, contact, active:true, created:Date.now()});
+      saveStorage('suppliers'); state.editId=null; renderForm(); renderList();
+    }
+
+    function saveSupply(){
+      const name = document.getElementById('s_name').value.trim();
+      const categoryId = document.getElementById('s_category').value;
+      const brandId = document.getElementById('s_brand').value;
+      const supplierId = document.getElementById('s_supplier').value;
+      const details = document.getElementById('s_details').value.trim();
+      if(!name){alert('Name is required'); return}
+      if(!categoryId){if(!confirm('No category selected. Continue?')) return}
+      if(state.editId){ const rec = state.data.supplies.find(c=>c.id===state.editId); if(!rec) return; rec.name=name; rec.categoryId=categoryId||null; rec.brandId=brandId||null; rec.supplierId=supplierId||null; rec.details=details; rec.updated=Date.now(); }
+      else state.data.supplies.push({id:uid('supply'), name, categoryId:categoryId||null, brandId:brandId||null, supplierId:supplierId||null, details, active:true, created:Date.now()});
+      saveStorage('supplies'); state.editId=null; renderForm(); renderList();
+    }
+
+    // ---------- List / Table ----------
+    function renderList(){
+      const m = state.module; const items = state.data[m];
+      // filter
+      const filtered = items.filter(it=>{
+        if(state.filter.status==='active' && !it.active) return false;
+        if(state.filter.status==='inactive' && it.active) return false;
+        if(!state.filter.q) return true;
+        const q = state.filter.q;
+        return (it.name && it.name.toLowerCase().includes(q)) || (it.description && it.description.toLowerCase().includes(q)) || (it.notes && it.notes.toLowerCase().includes(q)) || (it.contact && it.contact.toLowerCase().includes(q)) || (it.details && it.details.toLowerCase().includes(q));
+      });
+
+      countEl.innerText = filtered.length;
+      listArea.innerHTML = '';
+
+      if(m==='categories' || m==='brands' || m==='suppliers'){
+        const table = document.createElement('table');
+        const thead = document.createElement('thead'); thead.innerHTML = '<tr><th>Name</th><th>Info</th><th>Status</th><th></th></tr>';
+        table.appendChild(thead);
+        const tbody = document.createElement('tbody');
+        filtered.forEach(it=>{
+          const tr = document.createElement('tr'); if(!it.active) tr.classList.add('inactive');
+          const info = (it.description||it.notes||it.contact||'');
+          tr.innerHTML = `<td><strong>${escapeHtml(it.name)}</strong></td><td><small>${escapeHtml(info)}</small></td><td>${it.active?'<span class="chip">Active</span>':'<span class="chip" style="background:#fee2e2;color:#7f1d1d">Inactive</span>'}</td><td class="row-actions"></td>`;
+          const actions = tr.querySelector('.row-actions');
+          const edit = document.createElement('button'); edit.className='btn ghost'; edit.innerText='Edit'; edit.addEventListener('click', ()=>{ state.editId=it.id; renderForm(); });
+          const toggle = document.createElement('button'); toggle.className='btn'; toggle.innerText= it.active? 'Deactivate' : 'Activate'; toggle.addEventListener('click', ()=>{ toggleActive(m,it.id); });
+          actions.appendChild(edit); actions.appendChild(toggle);
+          tbody.appendChild(tr);
+        });
+        table.appendChild(tbody); listArea.appendChild(table);
+      }
+
+      if(m==='supplies'){
+        const table = document.createElement('table');
+        table.innerHTML = '<thead><tr><th>Name</th><th>Category / Brand / Supplier</th><th>Details</th><th>Status</th><th></th></tr></thead>';
+        const tbody = document.createElement('tbody');
+        filtered.forEach(it=>{
+          const tr = document.createElement('tr'); if(!it.active) tr.classList.add('inactive');
+          const category = state.data.categories.find(c=>c.id===it.categoryId);
+          const brand = state.data.brands.find(b=>b.id===it.brandId);
+          const supplier = state.data.suppliers.find(s=>s.id===it.supplierId);
+          const meta = `${category?category.name:'-'} / ${brand?brand.name:'-'} / ${supplier?supplier.name:'-'}`;
+          tr.innerHTML = `<td><strong>${escapeHtml(it.name)}</strong></td><td><small>${escapeHtml(meta)}</small></td><td><small>${escapeHtml(it.details||'')}</small></td><td>${it.active?'<span class="chip">Active</span>':'<span class="chip" style="background:#fee2e2;color:#7f1d1d">Inactive</span>'}</td><td class="row-actions"></td>`;
+          const actions = tr.querySelector('.row-actions');
+          const edit = document.createElement('button'); edit.className='btn ghost'; edit.innerText='Edit'; edit.addEventListener('click', ()=>{ state.editId=it.id; renderForm(); });
+          const toggle = document.createElement('button'); toggle.className='btn'; toggle.innerText= it.active? 'Deactivate' : 'Activate'; toggle.addEventListener('click', ()=>{ toggleActive(m,it.id); });
+          actions.appendChild(edit); actions.appendChild(toggle);
+          tbody.appendChild(tr);
+        });
+        table.appendChild(tbody); listArea.appendChild(table);
+      }
+    }
+
+    function toggleActive(module,id){
+      const rec = state.data[module].find(x=>x.id===id); if(!rec) return; rec.active = !rec.active; rec.updated=Date.now(); saveStorage(module); renderList(); renderForm();
+    }
+
+    // ---------- helpers ----------
+    function escapeHtml(s){ if(!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }
+
+    // ---------- init ----------
+    function init(){ loadStorage(); // ensure arrays
+      for(const k of Object.keys(state.data)){ if(!Array.isArray(state.data[k])) state.data[k]=[] }
+      renderForm(); renderList();
+    }
+
+    // bootstrap
+    init();
+
+    // Expose for debugging (optional)
+    window.pm = {state, saveStorage, loadStorage, renderList};
+  </script>
+</body>
+</html>

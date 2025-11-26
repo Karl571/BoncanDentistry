@@ -1,0 +1,376 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Records</title>
+  <link rel="stylesheet" href="patientrecords.css">
+</head>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Georgia", serif;
+}
+
+body {
+    background: #f5f5f5;
+}
+
+/* Container for Sidebar and Main Content */
+.container {
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 230px;
+    background-color: #003B3A;
+    height: 100vh;
+    padding: 20px;
+    color: white;
+}
+
+.profile {
+    text-align: center;
+}
+
+.avatar {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: white;
+    margin: auto;
+}
+
+.username {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+/* Sidebar Links */
+.nav {
+    margin-top: 25px;
+}
+
+.nav-link {
+    display: block;
+    padding: 10px;
+    margin-bottom: 8px;
+    text-decoration: none;
+    background: none;
+    color: #d8d8d8;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: #d1d1d1;
+    color: #000;
+}
+
+.logout {
+    position: absolute;
+    bottom: 30px;
+}
+
+.logout-btn {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* Main Content */
+.main {
+    padding: 40px;
+    width: 100%;
+}
+
+.title {
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 16px;
+    margin-bottom: 25px;
+    color: #555;
+}
+
+/* Patient Records Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+table th {
+    background-color: #003B3A;
+    color: white;
+    font-size: 16px;
+}
+
+table td {
+    background-color: #fff;
+}
+
+button.action-btn {
+    padding: 8px 18px;
+    background-color: #003B3A;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button.action-btn:hover {
+    background-color: #4d7470;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .main {
+        margin-left: 200px;
+    }
+
+    table th, table td {
+        font-size: 12px;
+    }
+}
+
+</style>
+<body>
+
+<div class="container">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="profile">
+      <div class="avatar"></div>
+      <p class="username">Karl</p>
+    </div>
+    <hr>
+
+    <nav class="nav">
+      <a href="dashboard.html" class="nav-link">Home</a>
+      <a href="appointment.html" class="nav-link">Appointment</a>
+      <a href="patientrecord.html" class="nav-link active">Patient Records</a>
+      <a href="services.html" class="nav-link">List Of Services</a>
+      <a href="transaction.html" class="nav-link">Transaction History</a>
+    </nav>
+
+    <div class="logout">
+      <a href="#" class="logout-btn">Log out</a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+    <h1 class="title">Patient Records</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Service</th>
+          <th>Dentist</th>
+          <th>Diagnosis/Notes</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Oct 25, 2025</td>
+          <td>Tooth Extraction</td>
+          <td>Dr. Boncan</td>
+          <td>Impacted molar removed</td>
+          <td>Completed</td>
+          <td><button class="action-btn">View</button></td>
+        </tr>
+        <tr>
+          <td>Oct 27, 2025</td>
+          <td>Consultation</td>
+          <td>Dr. Boncan</td>
+          <td>Recommended Whitening Treatment</td>
+          <td>Cancelled</td>
+          <td><button class="action-btn">View</button></td>
+        </tr>
+        <tr>
+          <td>Oct 29, 2025</td>
+          <td>Cleaning</td>
+          <td>Dr. Boncan</td>
+          <td>Impacted molar removed</td>
+          <td>Pending</td>
+          <td><button class="action-btn">View</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+</div>
+
+</body>
+</html>
+
+
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Georgia", serif;
+}
+
+body {
+    background: #f5f5f5;
+}
+
+/* Container for Sidebar and Main Content */
+.container {
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 230px;
+    background-color: #003B3A;
+    height: 100vh;
+    padding: 20px;
+    color: white;
+}
+
+.profile {
+    text-align: center;
+}
+
+.avatar {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: white;
+    margin: auto;
+}
+
+.username {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+/* Sidebar Links */
+.nav {
+    margin-top: 25px;
+}
+
+.nav-link {
+    display: block;
+    padding: 10px;
+    margin-bottom: 8px;
+    text-decoration: none;
+    background: none;
+    color: #d8d8d8;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: #d1d1d1;
+    color: #000;
+}
+
+.logout {
+    position: absolute;
+    bottom: 30px;
+}
+
+.logout-btn {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* Main Content */
+.main {
+    padding: 40px;
+    width: 100%;
+}
+
+.title {
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 16px;
+    margin-bottom: 25px;
+    color: #555;
+}
+
+/* Patient Records Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+table th {
+    background-color: #003B3A;
+    color: white;
+    font-size: 16px;
+}
+
+table td {
+    background-color: #fff;
+}
+
+button.action-btn {
+    padding: 8px 18px;
+    background-color: #003B3A;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button.action-btn:hover {
+    background-color: #4d7470;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .main {
+        margin-left: 200px;
+    }
+
+    table th, table td {
+        font-size: 12px;
+    }
+}
