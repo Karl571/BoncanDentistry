@@ -179,6 +179,7 @@ class SQLConnection
         $fullName = trim("{$user['firstname']} {$user['middlename']} {$user['surname']}");
 
         return [
+             
             'FullName' => $fullName,
             'RoleId' => $user['role_id'],
             'RoleName' => $user['role_name'],

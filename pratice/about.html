@@ -3,194 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Dashboard</title>
-    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <title>Document</title>
 </head>
 <style>
-  /* RESET */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #075550;
-    height: 100vh;
-    overflow: hidden;
-}
-
-/* MAIN LAYOUT */
-.dashboard-container {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-}
-
+    /* SIDEBAR STYLING */
 .sidebar {
     width: 260px;
-    background: #073b36;
+    background: #063d38;
     color: white;
-    padding: 30px 20px;
+    padding: 35px 25px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* moves content to top */
+    height: 100vh;
+    overflow-y: auto;
+    border-right: 2px solid #0a6a62;
 }
-.logout {
-    margin-top: auto;
-}
-
-
 
 .profile {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 45px;
 }
 
-.avatar {
-    font-size: 35px;
-    background: #fff;
-    color: #073b36;
-    height: 55px;
-    width: 55px;
-    border-radius: 50%;
-    margin: auto;
+.profile h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.menu {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .menu a {
-    display: block;
-    margin: 18px 0;
     text-decoration: none;
     color: white;
-    font-size: 16px;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-    padding-bottom: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px 15px;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: 0.25s;
 }
 
 .menu a:hover {
-    color: #59d3bd;
+    background: #0b746a;
+    color: #ffffff;
 }
 
-.logout {
-    color: #ffb3b3;
-    text-decoration: none;
+.menu a.active {
+    background: #0b746a;
+    color: #ffffff;
     font-weight: bold;
 }
 
-/* MAIN CONTENT */
-.main-content {
-    flex: 1;
-    background: white;
-    padding: 50px;
-    overflow-y: auto;
-}
-
-.main-content h1 {
-    font-size: 25px;
-    margin-bottom: 8px;
-}
-
-.main-content p {
-    color: #444;
-    margin-bottom: 20px;
-}
-
-/* CARD GRID */
-.cards {
-    display: flex;
-    gap: 25px;
-}
-
-/* CARD STYLES */
-.card {
-    background: #f1f1f1;
-    padding: 22px;
-    border-radius: 12px;
-    width: 30%;
-}
-
-.card h3 {
-    margin-bottom: 20px;
-}
-
-button {
-    margin-top: 15px;
-    padding: 9px 15px;
-    border: none;
-    background: #0b5a53;
-    color: white;
-    cursor: pointer;
+.logout {
+    margin-top: auto;
+    text-decoration: none;
+    color: #ffb3b3;
+    background: rgba(255, 0, 0, 0.15);
+    padding: 12px 15px;
     border-radius: 6px;
+    font-weight: bold;
+    transition: 0.25s;
 }
 
-button:hover {
-    background: #097065;
+.logout:hover {
+    background: #ff4d4d;
+    color: white;
 }
+
 
 </style>
 <body>
-
-<div class="dashboard-container">
-
-    <!-- SIDEBAR -->
     <aside class="sidebar">
-        <div class="profile">
-            <div class="avatar">👤</div>
-            <h3>Karl</h3>
-        </div>
+    <div class="profile">
+        <h3>Karl</h3>
+    </div>
 
-        <nav class="menu">
-            <a href="#">Home</a>
-            <a href="#">Appointment</a>
-            <a href="#">Patient Records</a>
-            <a href="#">List Of Services</a>
-            <a href="#">Transaction History</a>
-        </nav>
+    <nav class="menu">
+        <a href="patient_dashboard.html">Home</a>
+        <a href="appointment.html" class="active">Appointment</a>
+        <a href="patient_record.html">Patient Records</a>
+        <a href="service.html">List Of Services</a>
+        <a href="transaction_history.html">Transaction History</a>
+        <a href="profile.html">Profile / Account Settings</a>
+    </nav>
 
-        <a href="logout.php" class="logout">Log Out</a>
-    </aside>
-
-    <!-- MAIN CONTENT -->
-    <main class="main-content">
-        <h1>Welcome Back, Karl!</h1>
-        <p>Here’s a brief overview of your upcoming appointment and dental history.</p>
-
-        <div class="cards">
-
-            <div class="card">
-                <h3>Next Appointment</h3>
-                <p><b>Date:</b> Oct 25, 2025</p>
-                <p><b>Time:</b> 10:00 AM</p>
-                <p><b>Doctor:</b> Dr. Ricardo B. Boncan</p>
-                <p><b>Service:</b> Dental Cleaning</p>
-                <button>View Appointment Details</button>
-            </div>
-
-            <div class="card">
-                <h3>Dental History</h3>
-                <p><b>Date:</b> Oct 05, 2025</p>
-                <p><b>Service:</b> Cleaning</p>
-                <p><b>Status:</b> Completed</p>
-                <button>View Full Record</button>
-            </div>
-
-            <div class="card">
-                <h3>Transaction Summary</h3>
-                <p><b>Date:</b> Oct 05, 2025</p>
-                <p><b>Service:</b> Cleaning</p>
-                <p><b>Amount:</b> 2,500</p>
-                <p><b>Status:</b> Paid</p>
-                <button>View All Transactions</button>
-            </div>
-
-        </div>
-    </main>
-
-</div>
-
+    <a href="logout.php" class="logout">Log Out</a>
+</aside>
 </body>
 </html>

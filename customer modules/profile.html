@@ -1,0 +1,215 @@
+
+
+<style>
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #075550;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* MAIN LAYOUT */
+.dashboard-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 260px;
+    background: #073b36;
+    color: white;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.profile-sidebar {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.avatar {
+    font-size: 35px;
+    background: #fff;
+    color: #073b36;
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu a {
+    display: block;
+    margin: 18px 0;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 10px;
+}
+
+.menu a:hover,
+.menu a.active {
+    color: #59d3bd;
+}
+
+.logout {
+    margin-top: auto;
+    color: #ffb3b3;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* MAIN CONTENT */
+.main-content {
+    flex: 1;
+    background: white;
+    padding: 50px;
+    overflow-y: auto;
+}
+
+.main-content h1 {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.main-content p {
+    color: #444;
+    margin-bottom: 25px;
+}
+
+/* FORM STYLES */
+.form-container {
+    background: #f1f1f1;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 600px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #0b5a53;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 18px;
+    border: none;
+    background: #0b5a53;
+    color: white;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+button:hover {
+    background: #097065;
+}
+</style>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="profile-sidebar">
+            
+            <h3>Karl</h3>
+        </div>
+
+        <nav class="menu">
+            <a href="patient_dashboard.html">Home</a>
+            <a href="appointment.html">Appointment</a>
+            <a href="patient_record.html">Patient Records</a>
+            <a href="service.html">List Of Services</a>
+            <a href="transaction_history.html">Transaction History</a>
+            <a href="profile.html" class="active">Profile / Account Settings</a>
+        </nav>
+
+     <a href="../logout.php" class="logout">Log Out</a>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <h1>Profile / Account Settings</h1>
+        <p>Update your personal information and account credentials below.</p>
+
+        <div class="form-container">
+            <form action="update_profile.php" method="post">
+
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" value="Karl">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" value="karl@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" id="phone" name="phone" value="+63 912 345 6789">
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address" value="Quezon City, Philippines">
+                </div>
+
+                <hr style="margin:20px 0; border-color:#ccc;">
+
+                <div class="form-group">
+                    <label for="currentPassword">Current Password</label>
+                    <input type="password" id="currentPassword" name="currentPassword">
+                </div>
+
+                <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="newPassword" name="newPassword">
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm New Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword">
+                </div>
+
+                <button type="submit">Update Profile</button>
+
+            </form>
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

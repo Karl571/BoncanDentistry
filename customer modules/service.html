@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transaction History</title>
-    
+    <title>List of Services</title>
+    <link rel="stylesheet" href="assets/css/dashboard.css">
 </head>
 
 <style>
@@ -97,14 +97,14 @@ body {
     margin-bottom: 20px;
 }
 
-/* TRANSACTION GRID */
-.transaction-list {
+/* SERVICE GRID */
+.services-list {
     display: flex;
     flex-wrap: wrap;
     gap: 25px;
 }
 
-/* TRANSACTION CARD */
+/* SERVICE CARD */
 .card {
     background: #f1f1f1;
     padding: 22px;
@@ -152,46 +152,61 @@ button:hover {
             <a href="patient_dashboard.html">Home</a>
             <a href="appointment.html">Appointment</a>
             <a href="patient_record.html">Patient Records</a>
-            <a href="service.html">List Of Services</a>
-            <a href="transaction_history.html" class="active">Transaction History</a>
+            <a href="service.html" class="active">List Of Services</a>
+            <a href="transaction_history.html">Transaction History</a>
             <a href="profile.html">Profile / Account Settings</a>
         </nav>
 
-        <a href="logout.php" class="logout">Log Out</a>
+        <a href="../logout.php" class="logout">Log Out</a>
     </aside>
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
-        <h1>Transaction History</h1>
-        <p>View all of your completed and pending transactions for dental services.</p>
+        <h1>Our Dental Services</h1>
+        <p>Explore the services offered at our clinic and their details.</p>
 
-        <div class="transaction-list">
+        <div class="services-list">
 
             <div class="card">
                 <h3>Dental Cleaning</h3>
-                <p><b>Date:</b> Oct 05, 2025</p>
-                <p><b>Service:</b> Cleaning</p>
-                <p><b>Amount:</b> 2,500</p>
-                <p><b>Status:</b> Paid</p>
-                <button>View Details</button>
+                <p><b>Price:</b> ₱2,500</p>
+                <p>Routine cleaning to remove plaque and tartar.</p>
+                <button>Book Now</button>
             </div>
 
             <div class="card">
                 <h3>Tooth Filling</h3>
-                <p><b>Date:</b> Sep 10, 2025</p>
-                <p><b>Service:</b> Filling</p>
-                <p><b>Amount:</b> 3,000</p>
-                <p><b>Status:</b> Paid</p>
-                <button>View Details</button>
+                <p><b>Price:</b> ₱3,000</p>
+                <p>Restoration of cavities using dental filling materials.</p>
+                <button>Book Now</button>
             </div>
 
             <div class="card">
-                <h3>Consultation Fee</h3>
-                <p><b>Date:</b> Aug 15, 2025</p>
-                <p><b>Service:</b> Consultation</p>
-                <p><b>Amount:</b> 1,000</p>
-                <p><b>Status:</b> Pending</p>
-                <button>View Details</button>
+                <h3>Tooth Extraction</h3>
+                <p><b>Price:</b> ₱4,500</p>
+                <p>Removal of a damaged or problematic tooth safely.</p>
+                <button>Book Now</button>
+            </div>
+
+            <div class="card">
+                <h3>Consultation</h3>
+                <p><b>Price:</b> ₱1,000</p>
+                <p>Initial consultation with our dental specialists.</p>
+                <button>Book Now</button>
+            </div>
+
+            <div class="card">
+                <h3>Fluoride Treatment</h3>
+                <p><b>Price:</b> ₱1,200</p>
+                <p>Strengthens teeth to prevent decay.</p>
+                <button>Book Now</button>
+            </div>
+
+            <div class="card">
+                <h3>Teeth Whitening</h3>
+                <p><b>Price:</b> ₱5,000</p>
+                <p>Professional whitening treatment for a brighter smile.</p>
+                <button>Book Now</button>
             </div>
 
         </div>

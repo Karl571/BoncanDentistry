@@ -473,12 +473,12 @@ else if (moduleName.includes("Customer Profile") || moduleName.includes("Profile
                 } else if (row.module.includes("Maintenance")) {
                     maintenanceRows.push(row);
                 }else if (row.module.startsWith("Customer") || row.module.includes("Customer")) { 
-        customerRows.push(row);   
+                 customerRows.push(row);   
                 }else if (row.module.includes("Doctor")||row.module.includes("Transaction")|| row.module.includes("Request")|| row.module.includes("Logs")) {
                     transactionRows.push(row);
                 } else if (row.module.includes("Stocking")) {
                     inventoryRows.push(row);
-                }  {
+                }else { 
                     otherRows.push(row);
                 }
             });

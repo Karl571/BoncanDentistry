@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transaction History</title>
-    
+    <title>Patient Dashboard</title>
+    <link rel="stylesheet" href="assets/css/dashboard.css">
 </head>
-
 <style>
-/* RESET */
+  /* RESET */
 * {
     margin: 0;
     padding: 0;
@@ -36,8 +35,13 @@ body {
     padding: 30px 20px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: flex-start; /* moves content to top */
 }
+.logout {
+    margin-top: auto;
+}
+
+
 
 .profile {
     text-align: center;
@@ -67,13 +71,11 @@ body {
     padding-bottom: 10px;
 }
 
-.menu a:hover, 
-.menu a.active {
+.menu a:hover {
     color: #59d3bd;
 }
 
 .logout {
-    margin-top: auto;
     color: #ffb3b3;
     text-decoration: none;
     font-weight: bold;
@@ -97,29 +99,22 @@ body {
     margin-bottom: 20px;
 }
 
-/* TRANSACTION GRID */
-.transaction-list {
+/* CARD GRID */
+.cards {
     display: flex;
-    flex-wrap: wrap;
     gap: 25px;
 }
 
-/* TRANSACTION CARD */
+/* CARD STYLES */
 .card {
     background: #f1f1f1;
     padding: 22px;
     border-radius: 12px;
     width: 30%;
-    min-width: 300px;
 }
 
 .card h3 {
-    margin-bottom: 15px;
-    color: #0b5a53;
-}
-
-.card p {
-    margin-bottom: 5px;
+    margin-bottom: 20px;
 }
 
 button {
@@ -135,8 +130,8 @@ button {
 button:hover {
     background: #097065;
 }
-</style>
 
+</style>
 <body>
 
 <div class="dashboard-container">
@@ -144,16 +139,16 @@ button:hover {
     <!-- SIDEBAR -->
     <aside class="sidebar">
         <div class="profile">
-           
-            <h3>Karl</h3>
+            
+            <h3>shene</h3>
         </div>
 
         <nav class="menu">
             <a href="patient_dashboard.html">Home</a>
-            <a href="appointment.html">Appointment</a>
+            <a href="appointment.php">Appointment</a>
             <a href="patient_record.html">Patient Records</a>
             <a href="service.html">List Of Services</a>
-            <a href="transaction_history.html" class="active">Transaction History</a>
+            <a href="transaction_history.html">Transaction History</a>
             <a href="profile.html">Profile / Account Settings</a>
         </nav>
 
@@ -162,40 +157,38 @@ button:hover {
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
-        <h1>Transaction History</h1>
-        <p>View all of your completed and pending transactions for dental services.</p>
+        <h1>Welcome Back, shene</h1>
+        <p>Here’s a brief overview of your upcoming appointment and dental history.</p>
 
-        <div class="transaction-list">
+        <div class="cards">
 
             <div class="card">
-                <h3>Dental Cleaning</h3>
+                <h3>Next Appointment</h3>
+                <p><b>Date:</b> Oct 25, 2025</p>
+                <p><b>Time:</b> 10:00 AM</p>
+                <p><b>Doctor:</b> Dr. Ricardo B. Boncan</p>
+                <p><b>Service:</b> Dental Cleaning</p>
+                <button>View Appointment Details</button>
+            </div>
+
+            <div class="card">
+                <h3>Dental History</h3>
+                <p><b>Date:</b> Oct 05, 2025</p>
+                <p><b>Service:</b> Cleaning</p>
+                <p><b>Status:</b> Completed</p>
+                <button>View Full Record</button>
+            </div>
+
+            <div class="card">
+                <h3>Transaction Summary</h3>
                 <p><b>Date:</b> Oct 05, 2025</p>
                 <p><b>Service:</b> Cleaning</p>
                 <p><b>Amount:</b> 2,500</p>
                 <p><b>Status:</b> Paid</p>
-                <button>View Details</button>
-            </div>
-
-            <div class="card">
-                <h3>Tooth Filling</h3>
-                <p><b>Date:</b> Sep 10, 2025</p>
-                <p><b>Service:</b> Filling</p>
-                <p><b>Amount:</b> 3,000</p>
-                <p><b>Status:</b> Paid</p>
-                <button>View Details</button>
-            </div>
-
-            <div class="card">
-                <h3>Consultation Fee</h3>
-                <p><b>Date:</b> Aug 15, 2025</p>
-                <p><b>Service:</b> Consultation</p>
-                <p><b>Amount:</b> 1,000</p>
-                <p><b>Status:</b> Pending</p>
-                <button>View Details</button>
+                <button>View All Transactions</button>
             </div>
 
         </div>
-
     </main>
 
 </div>

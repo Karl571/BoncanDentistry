@@ -65,7 +65,18 @@ document.addEventListener('DOMContentLoaded', () => {
             sessionStorage.setItem('user', JSON.stringify(data.user));
 
             // Redirect to the main admin view
-            window.location.href = 'modules/admin_vw.html'; 
+            const roleId = data.user.RoleId;
+
+if (roleId == 1) {
+    window.location.href = 'modules/admin_vw.html';
+}
+else if (roleId == 23) {
+    window.location.href = 'customer modules/patient_dashboard.php';
+}
+else {
+    alert("Unknown user role.");
+}
+
 
         } catch (error) {
             console.error("Network or processing error during login:", error);
